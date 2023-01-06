@@ -1,4 +1,3 @@
-//
 //  WeatherModel.swift
 //  OpenWeatherApp
 //
@@ -15,7 +14,10 @@ struct WeatherModel: Decodable{
 }
 
 struct Current: Decodable {
-    let dt, temp: Double
+    let dt: Double
+    let temp: Double
+    let humidity: Double
+    let windSpeed: Double
     let weather: [WeatherInfo]
 }
 
@@ -45,3 +47,5 @@ struct DailyTemp: Decodable{
 struct DailyWeatherInfo: Decodable{
     let icon: String
 }
+
+

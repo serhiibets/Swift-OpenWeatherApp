@@ -81,6 +81,8 @@ class WeatherPresenter: WeatherPresentationLogic {
     private func headerViewModel(weatherModel: WeatherModel, hourlyCells: [CurrentWeatherViewModel.Hourly], maxMinTemp: String, dailyCells: [CurrentWeatherViewModel.Daily], locality: String) -> CurrentWeatherViewModel{
         return CurrentWeatherViewModel.init(locality: locality,
                                             temp: setSign(temp: Int(weatherModel.current.temp)),
+                                            humidity: String(weatherModel.current.humidity),
+                                            wind: String(weatherModel.current.windSpeed),
                                             weatherDescription: weatherModel.current.weather.first?.description ?? "null",
                                             icon: weatherModel.current.weather.first?.icon ?? "unknown",
                                             hourlyWeather: hourlyCells,

@@ -8,6 +8,8 @@
 struct CurrentWeatherViewModel {
     let locality: String
     let temp: String
+    let humidity: String
+    let wind: String
     let weatherDescription: String
     let icon: String
     let hourlyWeather: [Hourly]

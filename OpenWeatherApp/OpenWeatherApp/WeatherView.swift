@@ -66,7 +66,7 @@ class WeatherView: UIScrollView{
         return label
     }()
     
-    private var dtIcon: UIImageView = {
+    private var humidityIcon: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "drop")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +75,7 @@ class WeatherView: UIScrollView{
         return image
     }()
     
-    private var dtLabel: UILabel = {
+    private var humidityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24)
@@ -122,8 +122,8 @@ class WeatherView: UIScrollView{
         mainView.addSubview(cloudBigImage)
         mainView.addSubview(tempIcon)
         mainView.addSubview(tempMinMaxLabel)
-        mainView.addSubview(dtIcon)
-        mainView.addSubview(dtLabel)
+        mainView.addSubview(humidityIcon)
+        mainView.addSubview(humidityLabel)
         mainView.addSubview(windIcon)
         mainView.addSubview(windLabel)
         
@@ -174,21 +174,21 @@ class WeatherView: UIScrollView{
         tempMinMaxLabel.leadingAnchor.constraint(equalTo: tempIcon.trailingAnchor, constant: 10).isActive = true
         tempMinMaxLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
         
-        dtIcon.topAnchor.constraint(equalTo: tempIcon.bottomAnchor, constant: 15).isActive = true
-        dtIcon.leadingAnchor.constraint(equalTo: cloudBigImage.trailingAnchor, constant: 20).isActive = true
-        dtIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        dtIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        humidityIcon.topAnchor.constraint(equalTo: tempIcon.bottomAnchor, constant: 15).isActive = true
+        humidityIcon.leadingAnchor.constraint(equalTo: cloudBigImage.trailingAnchor, constant: 20).isActive = true
+        humidityIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        humidityIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        dtLabel.topAnchor.constraint(equalTo: tempMinMaxLabel.bottomAnchor, constant: 15).isActive = true
-        dtLabel.leadingAnchor.constraint(equalTo: dtIcon.trailingAnchor, constant: 10).isActive = true
-        dtLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
+        humidityLabel.topAnchor.constraint(equalTo: tempMinMaxLabel.bottomAnchor, constant: 15).isActive = true
+        humidityLabel.leadingAnchor.constraint(equalTo: humidityIcon.trailingAnchor, constant: 10).isActive = true
+        humidityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
         
-        windIcon.topAnchor.constraint(equalTo: dtIcon.bottomAnchor, constant: 15).isActive = true
+        windIcon.topAnchor.constraint(equalTo: humidityIcon.bottomAnchor, constant: 15).isActive = true
         windIcon.leadingAnchor.constraint(equalTo: cloudBigImage.trailingAnchor, constant: 20).isActive = true
         windIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
         windIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        windLabel.topAnchor.constraint(equalTo: dtLabel.bottomAnchor, constant: 15).isActive = true
+        windLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 15).isActive = true
         windLabel.leadingAnchor.constraint(equalTo: windIcon.trailingAnchor, constant: 10).isActive = true
         windLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
     }
@@ -200,7 +200,8 @@ class WeatherView: UIScrollView{
             
             self.cityLabel.text = viewModel.locality
             self.tempMinMaxLabel.text = viewModel.maxMinTemp
-            //self.windLabel.text = viewModel.wind
+            self.humidityLabel.text = viewModel.humidity
+            self.windLabel.text = viewModel.wind
             
             self.hourlyCollectionView.set(cells: viewModel.hourlyWeather)
             self.dailyTableView.set(cells: viewModel.dailyWeather)
