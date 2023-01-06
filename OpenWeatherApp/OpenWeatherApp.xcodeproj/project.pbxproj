@@ -15,6 +15,8 @@
 		F425DF5A296821E700DD820F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF59296821E700DD820F /* API.swift */; };
 		F425DF5C296822B700DD820F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF5B296822B700DD820F /* WeatherModel.swift */; };
 		F425DF602968237400DD820F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF5F2968237400DD820F /* NetworkService.swift */; };
+		F425DF632968242600DD820F /* Extenion+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF622968242600DD820F /* Extenion+String.swift */; };
+		F425DF652968244F00DD820F /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF642968244F00DD820F /* BlurEffectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		F425DF59296821E700DD820F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F425DF5B296822B700DD820F /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		F425DF5F2968237400DD820F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F425DF622968242600DD820F /* Extenion+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extenion+String.swift"; sourceTree = "<group>"; };
+		F425DF642968244F00DD820F /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 		F425DF392967804800DD820F /* OpenWeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				F425DF612968240800DD820F /* Helpers */,
 				F425DF552968217800DD820F /* API */,
 				F425DF582968219500DD820F /* Services */,
 				F425DF542968216F00DD820F /* Models */,
@@ -119,6 +124,15 @@
 			children = (
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F425DF612968240800DD820F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F425DF622968242600DD820F /* Extenion+String.swift */,
+				F425DF642968244F00DD820F /* BlurEffectView.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,8 +206,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F425DF3F2967804800DD820F /* WeatherViewController.swift in Sources */,
+				F425DF632968242600DD820F /* Extenion+String.swift in Sources */,
 				F425DF3B2967804800DD820F /* AppDelegate.swift in Sources */,
 				F425DF5A296821E700DD820F /* API.swift in Sources */,
+				F425DF652968244F00DD820F /* BlurEffectView.swift in Sources */,
 				F425DF3D2967804800DD820F /* SceneDelegate.swift in Sources */,
 				F425DF602968237400DD820F /* NetworkService.swift in Sources */,
 				F425DF5C296822B700DD820F /* WeatherModel.swift in Sources */,
