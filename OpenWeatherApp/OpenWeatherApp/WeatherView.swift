@@ -11,7 +11,7 @@ class WeatherView: UIScrollView{
     private var mainView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.alpha = 1
+        view.backgroundColor = #colorLiteral(red: 0.2876678407, green: 0.5634036064, blue: 0.88738662, alpha: 1)
         return view
     }()
     
@@ -31,7 +31,7 @@ class WeatherView: UIScrollView{
         label.font = UIFont.systemFont(ofSize: 35)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         label.textAlignment = .right
-        label.text = "Benidorm"
+        label.text = "-"
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         return label
@@ -61,7 +61,7 @@ class WeatherView: UIScrollView{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        label.text = "+27° / +19°"
+        label.text = "- / -"
         label.textAlignment = .left
         return label
     }()
@@ -80,7 +80,7 @@ class WeatherView: UIScrollView{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        label.text = "33 %"
+        label.text = "- %"
         label.textAlignment = .left
         return label
     }()
@@ -100,10 +100,13 @@ class WeatherView: UIScrollView{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        label.text = "10 м/cек"
+        label.text = "- м/cек"
         label.textAlignment = .left
         return label
     }()
+    
+    private var hourlyCollectionView = HourlyCollectionView()
+    private var dailyTableView = DailyTableView()
     
     //MARK: - init
     override init(frame: CGRect) {
@@ -112,6 +115,8 @@ class WeatherView: UIScrollView{
         configureSelfScrollView()
         
         addSubview(mainView)
+        
+        ///HeaderView
         mainView.addSubview(locationMarkerImage)
         mainView.addSubview(cityLabel)
         mainView.addSubview(cloudBigImage)
@@ -121,18 +126,18 @@ class WeatherView: UIScrollView{
         mainView.addSubview(dtLabel)
         mainView.addSubview(windIcon)
         mainView.addSubview(windLabel)
+        
+        ///Hourly weather CollectionView
+        mainView.addSubview(hourlyCollectionView)
+        
+        ///Deily weather TableView
+        mainView.addSubview(dailyTableView)
+
         makeConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func configureSelfScrollView(){
-        self.bounces = false
-        self.contentInsetAdjustmentBehavior = .never
-        self.showsVerticalScrollIndicator = false
-        backgroundColor = #colorLiteral(red: 0.2876678407, green: 0.5634036064, blue: 0.88738662, alpha: 1)
     }
     
     //MARK: - constraints
@@ -164,7 +169,7 @@ class WeatherView: UIScrollView{
         tempIcon.leadingAnchor.constraint(equalTo: cloudBigImage.trailingAnchor, constant: 20).isActive = true
         tempIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
         tempIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
-
+        
         tempMinMaxLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 30).isActive = true
         tempMinMaxLabel.leadingAnchor.constraint(equalTo: tempIcon.trailingAnchor, constant: 10).isActive = true
         tempMinMaxLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
@@ -186,5 +191,40 @@ class WeatherView: UIScrollView{
         windLabel.topAnchor.constraint(equalTo: dtLabel.bottomAnchor, constant: 15).isActive = true
         windLabel.leadingAnchor.constraint(equalTo: windIcon.trailingAnchor, constant: 10).isActive = true
         windLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
+    }
+    
+    //MARK: - configure
+    func configure (viewModel: CurrentWeatherViewModel){
+        DispatchQueue.main.async {
+            self.backgroundColor = self.mainView.backgroundColor
+            
+            self.cityLabel.text = viewModel.locality
+            self.tempMinMaxLabel.text = viewModel.maxMinTemp
+            //self.windLabel.text = viewModel.wind
+            
+            self.hourlyCollectionView.set(cells: viewModel.hourlyWeather)
+            self.dailyTableView.set(cells: viewModel.dailyWeather)
+
+            
+            
+            
+            self.hourlyCollectionView.frame = CGRect(x: -18,
+                                                     y: self.cloudBigImage.frame.maxY + 10,
+                                                     width: self.frame.width,
+                                                     height: 165)
+            
+            self.dailyTableView.frame = CGRect(x: -18,
+                                               y: self.hourlyCollectionView.frame.maxY,
+                                               width: self.frame.width,
+                                               height: self.frame.height - self.hourlyCollectionView.frame.height)
+        }
+    }
+    
+    func configureSelfScrollView(){
+        self.bounces = false
+        self.contentInsetAdjustmentBehavior = .never
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
+        backgroundColor = #colorLiteral(red: 0.2876678407, green: 0.5634036064, blue: 0.88738662, alpha: 1)
     }
 }
