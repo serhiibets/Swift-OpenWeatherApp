@@ -82,7 +82,7 @@ class WeatherPresenter: WeatherPresentationLogic {
         return CurrentWeatherViewModel.init(locality: locality,
                                             temp: setSign(temp: Int(weatherModel.current.temp)),
                                             humidity: String(weatherModel.current.humidity),
-                                            wind: String(weatherModel.current.windSpeed),
+                                            wind: String("\(weatherModel.current.windSpeed)  м/cек"),
                                             weatherDescription: weatherModel.current.weather.first?.description ?? "null",
                                             icon: weatherModel.current.weather.first?.icon ?? "unknown",
                                             hourlyWeather: hourlyCells,
