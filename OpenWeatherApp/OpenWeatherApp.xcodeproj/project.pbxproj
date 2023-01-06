@@ -17,6 +17,9 @@
 		F425DF602968237400DD820F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF5F2968237400DD820F /* NetworkService.swift */; };
 		F425DF632968242600DD820F /* Extenion+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF622968242600DD820F /* Extenion+String.swift */; };
 		F425DF652968244F00DD820F /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF642968244F00DD820F /* BlurEffectView.swift */; };
+		F425DF67296824FC00DD820F /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF66296824FC00DD820F /* WeatherView.swift */; };
+		F425DF692968285500DD820F /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF682968285500DD820F /* WeatherViewModel.swift */; };
+		F425DF6B296828A300DD820F /* WeatherEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF6A296828A300DD820F /* WeatherEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		F425DF5F2968237400DD820F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F425DF622968242600DD820F /* Extenion+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extenion+String.swift"; sourceTree = "<group>"; };
 		F425DF642968244F00DD820F /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
+		F425DF66296824FC00DD820F /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		F425DF682968285500DD820F /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		F425DF6A296828A300DD820F /* WeatherEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,8 @@
 		F425DF572968218800DD820F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F425DF682968285500DD820F /* WeatherViewModel.swift */,
+				F425DF6A296828A300DD820F /* WeatherEnum.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -122,6 +130,7 @@
 		F425DF5E2968232E00DD820F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F425DF66296824FC00DD820F /* WeatherView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,8 +218,11 @@
 				F425DF632968242600DD820F /* Extenion+String.swift in Sources */,
 				F425DF3B2967804800DD820F /* AppDelegate.swift in Sources */,
 				F425DF5A296821E700DD820F /* API.swift in Sources */,
+				F425DF6B296828A300DD820F /* WeatherEnum.swift in Sources */,
 				F425DF652968244F00DD820F /* BlurEffectView.swift in Sources */,
+				F425DF692968285500DD820F /* WeatherViewModel.swift in Sources */,
 				F425DF3D2967804800DD820F /* SceneDelegate.swift in Sources */,
+				F425DF67296824FC00DD820F /* WeatherView.swift in Sources */,
 				F425DF602968237400DD820F /* NetworkService.swift in Sources */,
 				F425DF5C296822B700DD820F /* WeatherModel.swift in Sources */,
 			);
@@ -358,7 +370,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -391,7 +403,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.weather";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
