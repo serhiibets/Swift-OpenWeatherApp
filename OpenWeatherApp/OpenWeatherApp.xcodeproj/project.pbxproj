@@ -14,6 +14,7 @@
 		F425DF472967804900DD820F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F425DF452967804900DD820F /* LaunchScreen.storyboard */; };
 		F425DF5A296821E700DD820F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF59296821E700DD820F /* API.swift */; };
 		F425DF5C296822B700DD820F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF5B296822B700DD820F /* WeatherModel.swift */; };
+		F425DF602968237400DD820F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF5F2968237400DD820F /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		F425DF482967804900DD820F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F425DF59296821E700DD820F /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		F425DF5B296822B700DD820F /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		F425DF5F2968237400DD820F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +63,10 @@
 				F425DF552968217800DD820F /* API */,
 				F425DF582968219500DD820F /* Services */,
 				F425DF542968216F00DD820F /* Models */,
-				F425DF562968217E00DD820F /* Views */,
+				F425DF5D2968231500DD820F /* Views */,
 				F425DF572968218800DD820F /* ViewModels */,
 				F425DF3A2967804800DD820F /* AppDelegate.swift */,
 				F425DF3C2967804800DD820F /* SceneDelegate.swift */,
-				F425DF3E2967804800DD820F /* WeatherViewController.swift */,
 				F425DF432967804900DD820F /* Assets.xcassets */,
 				F425DF452967804900DD820F /* LaunchScreen.storyboard */,
 				F425DF482967804900DD820F /* Info.plist */,
@@ -89,13 +90,6 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		F425DF562968217E00DD820F /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		F425DF572968218800DD820F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,8 +100,25 @@
 		F425DF582968219500DD820F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				F425DF5F2968237400DD820F /* NetworkService.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		F425DF5D2968231500DD820F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F425DF5E2968232E00DD820F /* Views */,
+				F425DF3E2967804800DD820F /* WeatherViewController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		F425DF5E2968232E00DD820F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 				F425DF3B2967804800DD820F /* AppDelegate.swift in Sources */,
 				F425DF5A296821E700DD820F /* API.swift in Sources */,
 				F425DF3D2967804800DD820F /* SceneDelegate.swift in Sources */,
+				F425DF602968237400DD820F /* NetworkService.swift in Sources */,
 				F425DF5C296822B700DD820F /* WeatherModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
