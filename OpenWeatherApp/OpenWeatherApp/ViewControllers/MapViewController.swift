@@ -12,13 +12,13 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     
     //MARK: - Create UI components
-    private var mainView: UIView = {
+    private lazy var mainView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    private var searchController: UISearchController = {
+    private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
         
@@ -33,7 +33,7 @@ class MapViewController: UIViewController {
         return searchController
     }()
     
-    private var mapView: MKMapView = {
+    private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.mapType = .standard

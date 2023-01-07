@@ -1,10 +1,8 @@
-//
 //  DailyTableView.swift
 //  OpenWeatherApp
 //
 //  Created by Serhii Bets on 6/1/23.
 //
-
 import Foundation
 import UIKit
 
@@ -25,16 +23,15 @@ class DailyTableView: UITableView, UITableViewDataSource, UITableViewDelegate{
         register(DailyTableViewCell.self, forCellReuseIdentifier: DailyTableViewCell.reuseId)
     }
     
-    //MARK: - layoutSubviews
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - tableView methods
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
+    
+    //MARK: - TableView methods
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let cells = cells else { return 0}
         return cells.count
@@ -51,7 +48,7 @@ class DailyTableView: UITableView, UITableViewDataSource, UITableViewDelegate{
         return DailyTableView.cellHeight
     }
     
-    //MARK: - configure
+    //MARK: - Configure
     func set(cells: [CurrentWeatherViewModel.Daily]){
         self.cells = cells
         reloadData()

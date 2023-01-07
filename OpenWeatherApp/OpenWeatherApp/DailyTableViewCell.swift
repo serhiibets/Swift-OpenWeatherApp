@@ -11,7 +11,7 @@ class DailyTableViewCell: UITableViewCell{
     static let reuseId = "DailyTableViewCell"
     
     //MARK: - variables
-    private var dayOfWeekLabel: UILabel = {
+    private lazy var dayOfWeekLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
@@ -20,14 +20,14 @@ class DailyTableViewCell: UITableViewCell{
         return label
     }()
     
-    private var weatherImage: UIImageView = {
+    private lazy var weatherImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "09d")
         return view
     }()
     
-    private var tempMaxLabel: UILabel = {
+    private lazy var tempMaxLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
@@ -36,7 +36,7 @@ class DailyTableViewCell: UITableViewCell{
         return label
     }()
     
-    private var tempMinMaxLabel: UILabel = {
+    private lazy var tempMinMaxLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
@@ -45,25 +45,7 @@ class DailyTableViewCell: UITableViewCell{
         return label
     }()
     
-    //MARK: - init
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        backgroundColor = .white
-
-        contentView.addSubview(dayOfWeekLabel)
-        contentView.addSubview(weatherImage)
-        contentView.addSubview(tempMinMaxLabel)
-        contentView.addSubview(tempMaxLabel)
-        
-        makeConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //MARK: - constraints
+    // Constraints
     private func makeConstraints(){
         // dayOfWeekLabel constraints
         dayOfWeekLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -81,6 +63,23 @@ class DailyTableViewCell: UITableViewCell{
         weatherImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28).isActive = true
         weatherImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
         weatherImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
+    }
+    
+    //MARK: - init
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .white
+
+        contentView.addSubview(dayOfWeekLabel)
+        contentView.addSubview(weatherImage)
+        contentView.addSubview(tempMinMaxLabel)
+        contentView.addSubview(tempMaxLabel)
+        
+        makeConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - configure

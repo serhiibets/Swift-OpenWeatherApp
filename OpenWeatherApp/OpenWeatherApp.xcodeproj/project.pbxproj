@@ -82,12 +82,12 @@
 		F425DF392967804800DD820F /* OpenWeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				F425DF89296A37A100DD820F /* ViewControllers */,
 				F425DF552968217800DD820F /* API */,
 				F425DF84296A209E00DD820F /* App */,
 				F425DF612968240800DD820F /* Helpers */,
 				F425DF582968219500DD820F /* Services */,
 				F425DF542968216F00DD820F /* Models */,
-				F425DF5D2968231500DD820F /* Views */,
 				F425DF572968218800DD820F /* ViewModels */,
 				F425DF712968B75000DD820F /* WeatherPresenter.swift */,
 				F425DF732968B7B200DD820F /* WeatherInteractor.swift */,
@@ -137,10 +137,9 @@
 				F425DF752968BC9500DD820F /* DailyView */,
 				F425DF6C2968B2B000DD820F /* HourlyView */,
 				F425DF66296824FC00DD820F /* WeatherView.swift */,
-				F425DF3E2967804800DD820F /* WeatherViewController.swift */,
-				F425DF822969E0F900DD820F /* MapViewController.swift */,
 			);
 			name = Views;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		F425DF612968240800DD820F /* Helpers */ = {
@@ -177,6 +176,16 @@
 				F425DF3C2967804800DD820F /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		F425DF89296A37A100DD820F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F425DF5D2968231500DD820F /* Views */,
+				F425DF3E2967804800DD820F /* WeatherViewController.swift */,
+				F425DF822969E0F900DD820F /* MapViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

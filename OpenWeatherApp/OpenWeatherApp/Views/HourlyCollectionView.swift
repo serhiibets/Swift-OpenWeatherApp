@@ -1,14 +1,11 @@
-//
 //  HourlyCollectionView.swift
 //  OpenWeatherApp
 //
 //  Created by Serhii Bets on 6/1/23.
 //
-
 import UIKit
 
 class HourlyCollectionView: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-    
     var cells: [CurrentWeatherViewModel.Hourly]?
     
     //MARK: - init
@@ -29,7 +26,7 @@ class HourlyCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - collectionView methods
+    //MARK: - CollectionView methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let cells = cells else { return 0 }
         return cells.count

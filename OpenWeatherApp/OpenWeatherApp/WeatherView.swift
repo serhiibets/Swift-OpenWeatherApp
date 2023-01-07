@@ -1,10 +1,8 @@
-//
 //  WeatherView.swift
 //  OpenWeatherApp
 //
 //  Created by Serhii Bets on 6/1/23.
 //
-
 import UIKit
 
 protocol WeatherViewDelegate: AnyObject {
@@ -35,6 +33,7 @@ class WeatherView: UIScrollView {
     private lazy var spiner: UIActivityIndicatorView = {
         let spiner = UIActivityIndicatorView()
         spiner.style = .large
+        spiner.color = .white
         spiner.translatesAutoresizingMaskIntoConstraints = false
         spiner.startAnimating()
         return spiner
