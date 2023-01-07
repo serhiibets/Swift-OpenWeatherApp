@@ -1,17 +1,17 @@
-//
 //  MapViewController.swift
 //  OpenWeatherApp
 //
 //  Created by Serhii Bets on 7/1/23.
 //
-
 import UIKit
 import MapKit
 import CoreLocation
 
 class MapViewController: UIViewController {
+    //MARK: - Variables
     let locationManager = CLLocationManager()
     
+    //MARK: - Create UI components
     private var mainView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,40 @@ class MapViewController: UIViewController {
         return mapView
     }()
     
-    private func getLocation(){
+    // Constraints
+    private func makeConstraints(){
+        mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        mapView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
+        mapView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        mapView.contentHuggingPriority(for: .vertical)
+    }
+    
+    // Configure NavBar
+    func configureNavBar() {
+        navigationItem.searchController = searchController
+    }
+    
+    // MARK: - View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureNavBar()
+        
+        view.addSubview(mainView)
+        mainView.frame = self.view.frame
+        mainView.addSubview(mapView)
+        makeConstraints()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getLocation()
+    }
+}
+
+//MARK: - Extensions
+extension MapViewController: CLLocationManagerDelegate {
+    private func getLocation() {
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.requestWhenInUseAuthorization()
         
@@ -55,53 +88,13 @@ class MapViewController: UIViewController {
         }
     }
     
-    // MARK: - View lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.addSubview(mainView)
-        mainView.frame = self.view.frame
-        mainView.addSubview(mapView)
-                
-        configureNavBar()
-        makeConstraints()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        getLocation()
-    }
-    
-    //MARK: - Constraints
-    private func makeConstraints(){
-        mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        mapView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
-        mapView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        mapView.contentHuggingPriority(for: .vertical)
-    }
-    
-    //MARK: - Configure NavBar
-    func configureNavBar() {
-        navigationItem.searchController = searchController
-    }
-}
-
-extension MapViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locations.last != nil{
-            let currentLocation: CLLocationCoordinate2D = manager.location!.coordinate
-            
-            //add current position on the map
-            let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
-            let region = MKCoordinateRegion(center: currentLocation, span: span)
-            mapView.setRegion(region, animated: false)
-            
-            //Add marker annotation
-            let annotation = MKUserLocation()
-//            annotation.coordinate = currentLocation
-//            annotation.title = "Current Position"
-            mapView.addAnnotation(annotation)
-        }
+        guard locations.last != nil else { return }
+        guard let currentLocation = locationManager.location?.coordinate else { return }
+        self.locationManager.stopUpdatingLocation()
+        
+        let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: currentLocation, span: span)
+        mapView.setRegion(region, animated: false)
     }
 }
