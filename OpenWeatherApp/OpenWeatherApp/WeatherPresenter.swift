@@ -23,9 +23,7 @@ class WeatherPresenter: WeatherPresentationLogic {
     
     //MARK: - presentData
     func presentData(response: WeatherEnumModel.Response.ResponseType) {
-        
         switch response {
-        
         case .presentWeather(let weather, let locality):
             var hourlyCells: [CurrentWeatherViewModel.Hourly] = []
             var dailyCells: [CurrentWeatherViewModel.Daily] = []

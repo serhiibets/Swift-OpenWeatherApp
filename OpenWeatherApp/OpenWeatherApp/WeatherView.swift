@@ -7,7 +7,13 @@
 
 import UIKit
 
-class WeatherView: UIScrollView{
+protocol WeatherViewDelegate: AnyObject {
+    func mapButtonPressed()
+}
+
+class WeatherView: UIScrollView {
+    //weak var delegate: WeatherViewDelegate?
+    
     private var mainView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +41,15 @@ class WeatherView: UIScrollView{
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         return label
+    }()
+    
+    private var mapButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "location"), for: .normal)
+        //button.addTarget(self, action: #selector(mapButtonPressed), for: .touchUpInside)
+        return button
     }()
     
     private var cloudBigImage: UIImageView = {
@@ -117,8 +132,6 @@ class WeatherView: UIScrollView{
         addSubview(mainView)
         
         ///HeaderView
-        mainView.addSubview(locationMarkerImage)
-        mainView.addSubview(cityLabel)
         mainView.addSubview(cloudBigImage)
         mainView.addSubview(tempIcon)
         mainView.addSubview(tempMinMaxLabel)
@@ -150,27 +163,17 @@ class WeatherView: UIScrollView{
         mainView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         mainView.contentHuggingPriority(for: .vertical)
         
-        //locationMarkerImage constraints
-        locationMarkerImage.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 100).isActive = true
-        locationMarkerImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
-        locationMarkerImage.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        locationMarkerImage.widthAnchor.constraint(equalToConstant: 45).isActive = true
-        
-        // cityLabel constraints
-        cityLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 100).isActive = true
-        cityLabel.leadingAnchor.constraint(equalTo: locationMarkerImage.trailingAnchor, constant: 10).isActive = true
-        
-        cloudBigImage.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 20).isActive = true
+        cloudBigImage.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 20).isActive = true
         cloudBigImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
         cloudBigImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
         cloudBigImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-        tempIcon.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 30).isActive = true
+        tempIcon.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 30).isActive = true
         tempIcon.leadingAnchor.constraint(equalTo: cloudBigImage.trailingAnchor, constant: 20).isActive = true
         tempIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
         tempIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        tempMinMaxLabel.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 30).isActive = true
+        tempMinMaxLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 30).isActive = true
         tempMinMaxLabel.leadingAnchor.constraint(equalTo: tempIcon.trailingAnchor, constant: 10).isActive = true
         tempMinMaxLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
         
@@ -198,7 +201,8 @@ class WeatherView: UIScrollView{
         DispatchQueue.main.async {
             self.backgroundColor = self.mainView.backgroundColor
             
-            self.cityLabel.text = viewModel.locality
+            let vc = WeatherViewController()
+            self.inputViewController?.navigationItem.title = viewModel.locality
             self.tempMinMaxLabel.text = viewModel.maxMinTemp
             self.humidityLabel.text = viewModel.humidity
             self.windLabel.text = viewModel.wind
