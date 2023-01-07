@@ -200,8 +200,6 @@ class WeatherView: UIScrollView {
     func configure (viewModel: CurrentWeatherViewModel){
         DispatchQueue.main.async {
             self.backgroundColor = self.mainView.backgroundColor
-            
-            let vc = WeatherViewController()
             self.inputViewController?.navigationItem.title = viewModel.locality
             self.tempMinMaxLabel.text = viewModel.maxMinTemp
             self.humidityLabel.text = viewModel.humidity

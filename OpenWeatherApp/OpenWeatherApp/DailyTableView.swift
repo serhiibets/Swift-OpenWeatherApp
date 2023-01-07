@@ -20,7 +20,7 @@ class DailyTableView: UITableView, UITableViewDataSource, UITableViewDelegate{
         dataSource = self
         isScrollEnabled = false
         allowsSelection = false
-        backgroundColor = .clear
+        backgroundColor = .white
         
         register(DailyTableViewCell.self, forCellReuseIdentifier: DailyTableViewCell.reuseId)
     }
