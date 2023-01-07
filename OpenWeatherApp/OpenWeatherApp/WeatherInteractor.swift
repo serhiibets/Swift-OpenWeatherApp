@@ -14,7 +14,7 @@ protocol WeatherBusinessLogic {
 }
 
 class WeatherInteractor: NSObject, WeatherBusinessLogic, CLLocationManagerDelegate {
-    
+    //MARK: - Variables
     let locationManager = CLLocationManager()
     let geocoder = CLGeocoder()
     
