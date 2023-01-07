@@ -12,16 +12,36 @@ protocol WeatherViewDelegate: AnyObject {
 }
 
 class WeatherView: UIScrollView {
-    //weak var delegate: WeatherViewDelegate?
-    
-    private var mainView: UIView = {
+    //MARK: - Create UI components
+    private lazy var mainView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = #colorLiteral(red: 0.2876678407, green: 0.5634036064, blue: 0.88738662, alpha: 1)
+        view.alpha = 0
         return view
     }()
     
-    private var locationMarkerImage: UIImageView = {
+    // Loading View
+    private lazy var loadingText: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 30)
+        label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.textAlignment = .center
+        label.text = "Завантаження..."
+       return label
+    }()
+    
+    private lazy var spiner: UIActivityIndicatorView = {
+        let spiner = UIActivityIndicatorView()
+        spiner.style = .large
+        spiner.translatesAutoresizingMaskIntoConstraints = false
+        spiner.startAnimating()
+        return spiner
+    }()
+    
+    // Main view components
+    private lazy var locationMarkerImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "mappin.and.ellipse")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +51,7 @@ class WeatherView: UIScrollView {
         return image
     }()
     
-    private var cityLabel: UILabel = {
+    private lazy var cityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 35)
@@ -43,7 +63,7 @@ class WeatherView: UIScrollView {
         return label
     }()
     
-    private var mapButton: UIButton = {
+    private lazy var mapButton: UIButton = {
         let button = UIButton()
         button.setTitle("", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -52,7 +72,7 @@ class WeatherView: UIScrollView {
         return button
     }()
     
-    private var cloudBigImage: UIImageView = {
+    private lazy var cloudBigImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "cloud.sun")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -71,7 +91,7 @@ class WeatherView: UIScrollView {
         return image
     }()
     
-    private var tempMinMaxLabel: UILabel = {
+    private lazy var tempMinMaxLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24)
@@ -81,7 +101,7 @@ class WeatherView: UIScrollView {
         return label
     }()
     
-    private var humidityIcon: UIImageView = {
+    private lazy var humidityIcon: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "drop")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +110,7 @@ class WeatherView: UIScrollView {
         return image
     }()
     
-    private var humidityLabel: UILabel = {
+    private lazy var humidityLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24)
@@ -100,7 +120,7 @@ class WeatherView: UIScrollView {
         return label
     }()
     
-    private var windIcon: UIImageView = {
+    private lazy var windIcon: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "wind")
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -110,7 +130,7 @@ class WeatherView: UIScrollView {
         return image
     }()
     
-    private var windLabel: UILabel = {
+    private lazy var windLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24)
@@ -120,15 +140,16 @@ class WeatherView: UIScrollView {
         return label
     }()
     
-    private var hourlyCollectionView = HourlyCollectionView()
-    private var dailyTableView = DailyTableView()
+    private lazy var hourlyCollectionView = HourlyCollectionView()
+    private lazy var dailyTableView = DailyTableView()
     
     //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         configureSelfScrollView()
-        
+        addSubview(loadingText)
+        addSubview(spiner)
         addSubview(mainView)
         
         ///HeaderView
@@ -155,6 +176,14 @@ class WeatherView: UIScrollView {
     
     //MARK: - constraints
     private func makeConstraints(){
+        //Loading
+        loadingText.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        loadingText.topAnchor.constraint(equalTo: topAnchor, constant: 200).isActive = true
+        loadingText.contentHuggingPriority(for: .vertical)
+        
+        spiner.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        spiner.topAnchor.constraint(equalTo: self.loadingText.bottomAnchor, constant: 30).isActive = true
+        spiner.contentHuggingPriority(for: .vertical)
         
         // mainView constraints
         mainView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -199,6 +228,15 @@ class WeatherView: UIScrollView {
     //MARK: - configure
     func configure (viewModel: CurrentWeatherViewModel){
         DispatchQueue.main.async {
+            self.loadingText.alpha = 0
+            UIView.animate(withDuration: 0.4,
+                           delay: 0.0,
+                           options: [.allowUserInteraction],
+                           animations: { () -> Void in
+                self.mainView.alpha = 1
+                self.spiner.stopAnimating()
+            })
+            
             self.backgroundColor = self.mainView.backgroundColor
             self.inputViewController?.navigationItem.title = viewModel.locality
             self.tempMinMaxLabel.text = viewModel.maxMinTemp
