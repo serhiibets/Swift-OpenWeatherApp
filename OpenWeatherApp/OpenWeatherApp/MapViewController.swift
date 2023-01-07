@@ -11,7 +11,6 @@ import CoreLocation
 
 class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
-    var matchingItems:[MKMapItem] = []
     
     private var mainView: UIView = {
         let view = UIView()
@@ -35,10 +34,26 @@ class MapViewController: UIViewController {
     }()
     
     private var mapView: MKMapView = {
-        let map = MKMapView()
-        map.translatesAutoresizingMaskIntoConstraints = false
-        return map
+        let mapView = MKMapView()
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.mapType = .standard
+        mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
+        mapView.showsUserLocation = true
+        return mapView
     }()
+    
+    private func getLocation(){
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
+    }
     
     // MARK: - View lifecycle
     override func viewDidLoad() {
@@ -50,10 +65,14 @@ class MapViewController: UIViewController {
                 
         configureNavBar()
         makeConstraints()
-        
-        searchController.searchResultsUpdater = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        getLocation()
+    }
+    
+    //MARK: - Constraints
     private func makeConstraints(){
         mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
@@ -68,21 +87,21 @@ class MapViewController: UIViewController {
     }
 }
 
-extension MapViewController: UISearchResultsUpdating {
-  func updateSearchResults(for searchController: UISearchController) {
-      guard let searchBarText = searchController.searchBar.text else { return }
-      let request = MKLocalSearch.Request()
-      request.naturalLanguageQuery = searchBarText
-      request.region = mapView.region
-      let search = MKLocalSearch(request: request)
-      search.start { response, _ in
-          guard let response = response else {
-              return
-          }
-          self.matchingItems = response.mapItems
-          print(self.matchingItems)
-      }
-  }
+extension MapViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if locations.last != nil{
+            let currentLocation: CLLocationCoordinate2D = manager.location!.coordinate
+            
+            //add current position on the map
+            let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
+            let region = MKCoordinateRegion(center: currentLocation, span: span)
+            mapView.setRegion(region, animated: false)
+            
+            //Add marker annotation
+            let annotation = MKUserLocation()
+//            annotation.coordinate = currentLocation
+//            annotation.title = "Current Position"
+            mapView.addAnnotation(annotation)
+        }
+    }
 }
-
-

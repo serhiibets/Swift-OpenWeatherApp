@@ -61,7 +61,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
     
     //MARK: - Configure NavBar
     func configureNavBar(location: String) {
-        //navigationController?.navigationBar.backgroundColor = self.weatherView.backgroundColor
+        navigationController?.navigationBar.backgroundColor = self.weatherView.backgroundColor
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.isTranslucent = false
         let navBarAppearance = UINavigationBarAppearance()
@@ -98,12 +98,11 @@ extension WeatherViewController: WeatherControllerDelegate {
     // MARK: - NavBar Selectors
     
     @objc func handleMapButtonPressed() {
-        print("handle Map button pressed")
         let vc = MapViewController()
             navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func handleCurrentLocationPressed() {
-        print("handle Map button pressed")
+        interactor?.makeRequest(request: .getWeather)
     }
 }

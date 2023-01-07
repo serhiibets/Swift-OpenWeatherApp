@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 protocol WeatherBusinessLogic {
     func makeRequest(request: WeatherEnumModel.Request.RequestType)
@@ -22,10 +23,9 @@ class WeatherInteractor: NSObject, WeatherBusinessLogic, CLLocationManagerDelega
     
     //MARK: - makeRequest
     func makeRequest(request: WeatherEnumModel.Request.RequestType) {
-       
         switch request {
-        case .getWeather:
-            getLocation()
+            case .getWeather:
+                getLocation()
         }
     }
     
@@ -35,7 +35,7 @@ class WeatherInteractor: NSObject, WeatherBusinessLogic, CLLocationManagerDelega
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
-
+    
     //MARK: - locationManager
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
@@ -49,11 +49,11 @@ class WeatherInteractor: NSObject, WeatherBusinessLogic, CLLocationManagerDelega
         geocoder.reverseGeocodeLocation(currentLocation, preferredLocale: Locale.init(identifier: "uk_UA")) { placemarks, error in
             let locality = placemarks?[0].locality ?? (placemarks?[0].name ?? "Error of Location")
             
-                //getWeather
-                self.networkManager.getWeather(coordinates: coordinates) { weatherResponse in
-                    guard let weatherResponse = weatherResponse else { return }
-                    self.presenter?.presentData(response: .presentWeather(weather: weatherResponse, locality: locality))
-                }
+            //getWeather
+            self.networkManager.getWeather(coordinates: coordinates) { weatherResponse in
+                guard let weatherResponse = weatherResponse else { return }
+                self.presenter?.presentData(response: .presentWeather(weather: weatherResponse, locality: locality))
+            }
         }
     }
 }
