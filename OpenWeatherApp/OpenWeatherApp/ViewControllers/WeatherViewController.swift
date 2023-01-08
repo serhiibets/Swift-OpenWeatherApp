@@ -8,7 +8,6 @@ import CoreLocation
 
 protocol WeatherDisplayLogic: AnyObject {
     func displayData(viewModel: WeatherRouter.ViewModel.ViewModelData)
-    //func configure(viewModel: WeatherRouter.ViewModel.ViewModelData)
 }
 
 protocol WeatherControllerDelegate: AnyObject {

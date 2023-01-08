@@ -61,6 +61,7 @@ class MapViewController: UIViewController {
     // Configure NavBar
     func configureNavBar() {
         navigationItem.searchController = searchController
+        //navigationItem.backAction = #selector()
     }
     
     // MARK: - View lifecycle
