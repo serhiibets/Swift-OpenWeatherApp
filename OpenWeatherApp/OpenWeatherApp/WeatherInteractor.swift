@@ -46,9 +46,9 @@ class WeatherInteractor: NSObject, WeatherBusinessLogic, CLLocationManagerDelega
         
         //get coordinates
         guard let location = locations.last else { return }
+        guard let currentLocation = locationManager.location else { return }
         self.locationManager.stopUpdatingLocation()
         let coordinates = "lat=\(location.coordinate.latitude)&lon=\(location.coordinate.longitude)"
-        guard let currentLocation = locationManager.location else { return }
         
         //get location name
         geocoder.reverseGeocodeLocation(currentLocation, preferredLocale: Locale.init(identifier: "uk_UA")) { placemarks, error in

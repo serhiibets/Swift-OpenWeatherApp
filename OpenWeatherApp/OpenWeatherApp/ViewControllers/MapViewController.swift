@@ -10,6 +10,7 @@ import CoreLocation
 class MapViewController: UIViewController {
     //MARK: - Variables
     let locationManager = CLLocationManager()
+    let locationSearchTable = LocationSearchTableViewController()
     
     //MARK: - Create UI components
     private lazy var mainView: UIView = {
@@ -18,8 +19,19 @@ class MapViewController: UIViewController {
         return view
     }()
     
+    lazy var mapView: MKMapView = {
+        let mapView = MKMapView()
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.mapType = .standard
+        mapView.isZoomEnabled = true
+        mapView.isScrollEnabled = true
+        mapView.showsUserLocation = true
+        return mapView
+    }()
+    
     private lazy var searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
+        let searchController = UISearchController(searchResultsController: locationSearchTable)
+        searchController.searchResultsUpdater = locationSearchTable
         searchController.searchBar.translatesAutoresizingMaskIntoConstraints = false
         
         //configure placeholder
@@ -31,16 +43,6 @@ class MapViewController: UIViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.obscuresBackgroundDuringPresentation = false
         return searchController
-    }()
-    
-    private lazy var mapView: MKMapView = {
-        let mapView = MKMapView()
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.mapType = .standard
-        mapView.isZoomEnabled = true
-        mapView.isScrollEnabled = true
-        mapView.showsUserLocation = true
-        return mapView
     }()
     
     // Constraints
@@ -61,7 +63,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
-        
+
         view.addSubview(mainView)
         mainView.frame = self.view.frame
         mainView.addSubview(mapView)
@@ -96,5 +98,9 @@ extension MapViewController: CLLocationManagerDelegate {
         let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: currentLocation, span: span)
         mapView.setRegion(region, animated: false)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error: \(error.localizedDescription)")
     }
 }

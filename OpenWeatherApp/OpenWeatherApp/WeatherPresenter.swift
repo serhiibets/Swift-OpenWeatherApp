@@ -50,7 +50,7 @@ class WeatherPresenter: WeatherPresentationLogic {
             dailyCells[0].dt = "Сьогодні"
             
             // create data to minMaxLabel
-            let maxMinTemp = "\(dailyCells[0].maxTemp) / \(dailyCells[0].minTemp)"
+            let maxMinTemp = "\(dailyCells[0].minTemp) / \(dailyCells[0].maxTemp)"
             
             let currentWeather = headerViewModel(weatherModel: weather, hourlyCells: hourlyCells, maxMinTemp: maxMinTemp, dailyCells: dailyCells, locality: locality)
             
