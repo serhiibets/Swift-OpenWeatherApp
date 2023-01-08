@@ -5,16 +5,12 @@
 //
 import UIKit
 
-protocol WeatherViewDelegate: AnyObject {
-    func mapButtonPressed()
-}
-
 class WeatherView: UIScrollView {
     //MARK: - Create UI components
     private lazy var mainView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = #colorLiteral(red: 0.2876678407, green: 0.5634036064, blue: 0.88738662, alpha: 1)
+        view.backgroundColor = AppStyle.light.primaryBackgroundColor
         view.alpha = 0
         return view
     }()
@@ -25,6 +21,7 @@ class WeatherView: UIScrollView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 30)
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        label.backgroundColor = .clear
         label.textAlignment = .center
         label.text = "Завантаження..."
        return label
@@ -146,7 +143,6 @@ class WeatherView: UIScrollView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        configureSelfScrollView()
         addSubview(loadingText)
         addSubview(spiner)
         addSubview(mainView)
@@ -258,13 +254,5 @@ class WeatherView: UIScrollView {
                                                width: self.frame.width,
                                                height: self.frame.height - self.hourlyCollectionView.frame.height)
         }
-    }
-    
-    func configureSelfScrollView(){
-        self.bounces = false
-        self.contentInsetAdjustmentBehavior = .never
-        self.showsVerticalScrollIndicator = false
-        self.showsHorizontalScrollIndicator = false
-        backgroundColor = #colorLiteral(red: 0.2876678407, green: 0.5634036064, blue: 0.88738662, alpha: 1)
     }
 }

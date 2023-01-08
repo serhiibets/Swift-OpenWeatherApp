@@ -16,7 +16,7 @@ class DailyTableViewCell: UITableViewCell{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
         label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = AppStyle.light.blackTextColor
         return label
     }()
     
@@ -32,7 +32,7 @@ class DailyTableViewCell: UITableViewCell{
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.textColor = AppStyle.light.blackTextColor
         return label
     }()
     
@@ -68,7 +68,7 @@ class DailyTableViewCell: UITableViewCell{
     //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .white
+        backgroundColor = AppStyle.light.whiteBackgroundColor
 
         contentView.addSubview(dayOfWeekLabel)
         contentView.addSubview(weatherImage)

@@ -26,6 +26,7 @@
 		F425DF832969E0F900DD820F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF822969E0F900DD820F /* MapViewController.swift */; };
 		F425DF8D296ADAC000DD820F /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF8C296ADAC000DD820F /* LocationSearchTableViewController.swift */; };
 		F425DF8F296B021900DD820F /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF8E296B021900DD820F /* LocationService.swift */; };
+		F425DF91296B27D000DD820F /* AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF90296B27D000DD820F /* AppStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		F425DF822969E0F900DD820F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F425DF8C296ADAC000DD820F /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		F425DF8E296B021900DD820F /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		F425DF90296B27D000DD820F /* AppStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				F425DF622968242600DD820F /* Extension + String.swift */,
+				F425DF90296B27D000DD820F /* AppStyle.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				F425DF832969E0F900DD820F /* MapViewController.swift in Sources */,
 				F425DF3D2967804800DD820F /* SceneDelegate.swift in Sources */,
 				F425DF67296824FC00DD820F /* WeatherView.swift in Sources */,
+				F425DF91296B27D000DD820F /* AppStyle.swift in Sources */,
 				F425DF602968237400DD820F /* NetworkService.swift in Sources */,
 				F425DF5C296822B700DD820F /* WeatherModel.swift in Sources */,
 			);

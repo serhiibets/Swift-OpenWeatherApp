@@ -8,6 +8,7 @@ import CoreLocation
 
 protocol WeatherDisplayLogic: AnyObject {
     func displayData(viewModel: WeatherRouter.ViewModel.ViewModelData)
+    //func configure(viewModel: WeatherRouter.ViewModel.ViewModelData)
 }
 
 protocol WeatherControllerDelegate: AnyObject {
@@ -37,6 +38,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
     
         view.addSubview(weatherView)
         weatherView.frame = self.view.frame
+        view.backgroundColor = AppStyle.light.primaryBackgroundColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,7 +65,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.isTranslucent = false
         let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.backgroundColor = self.weatherView.backgroundColor
+        navBarAppearance.backgroundColor = AppStyle.light.primaryBackgroundColor
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         
@@ -74,7 +76,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
                                                 y: 0,
                                                 width: view.frame.width - CGFloat(leftNavBarInsect),
                                                 height: view.frame.height))
-        leftNavBarTitle.text = "-"
+        leftNavBarTitle.text = "Бенідорм"
         leftNavBarTitle.textColor = .white
         leftNavBarTitle.font = UIFont.systemFont(ofSize: 35)
         navigationItem.titleView = leftNavBarTitle

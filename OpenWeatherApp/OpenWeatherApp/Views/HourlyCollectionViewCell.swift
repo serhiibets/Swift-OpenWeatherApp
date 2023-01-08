@@ -54,7 +54,7 @@ class HourlyCollectionViewCell: UICollectionViewCell{
     //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = #colorLiteral(red: 0.3562327027, green: 0.6222828627, blue: 0.9425352216, alpha: 1)
+        backgroundColor = AppStyle.light.secondaryBackgroundColor
 
         contentView.addSubview(howerLabel)
         contentView.addSubview(weatherImage)
