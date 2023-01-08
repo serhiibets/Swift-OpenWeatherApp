@@ -7,6 +7,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
+protocol LocationSearchControllerProtocol {
+    func updateCurrentLocation(placemark: MKPlacemark)
+}
+
 class MapViewController: UIViewController {
     //MARK: - Variables
     let locationManager = CLLocationManager()
@@ -63,6 +67,8 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavBar()
+        
+        locationSearchTable.delegate = self
 
         view.addSubview(mainView)
         mainView.frame = self.view.frame
@@ -102,5 +108,13 @@ extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error: \(error.localizedDescription)")
+    }
+}
+
+extension MapViewController: LocationSearchControllerProtocol {
+    func updateCurrentLocation(placemark: MKPlacemark) {
+        let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
+        mapView.setRegion(region, animated: false)
     }
 }

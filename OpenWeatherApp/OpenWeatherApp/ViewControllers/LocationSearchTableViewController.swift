@@ -9,12 +9,13 @@ import MapKit
 
 class LocationSearchTableViewController : UITableViewController {
     var searchResults:[MKMapItem] = []
+    var delegate: LocationSearchControllerProtocol?
 }
 
 extension LocationSearchTableViewController : UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchBarText = searchController.searchBar.text else { return }
-        
+
         let searchRequest = MKLocalSearch.Request()
         searchRequest.naturalLanguageQuery = searchBarText
         searchRequest.region = MKCoordinateRegion(.world)
@@ -39,5 +40,11 @@ extension LocationSearchTableViewController {
         let selectedItem = searchResults[indexPath.row].placemark
         cell.textLabel?.text = selectedItem.title
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.updateCurrentLocation(placemark: searchResults[indexPath.row].placemark)
+        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.isHidden = true
     }
 }
