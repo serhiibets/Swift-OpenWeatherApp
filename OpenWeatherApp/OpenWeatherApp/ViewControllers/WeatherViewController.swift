@@ -1,15 +1,13 @@
-//
-//  ViewController.swift
+//  WeatherViewController.swift
 //  OpenWeatherApp
 //
 //  Created by Serhii Bets on 5/1/23.
 //
-
 import UIKit
 import CoreLocation
 
 protocol WeatherDisplayLogic: AnyObject {
-    func displayData(viewModel: WeatherEnumModel.ViewModel.ViewModelData)
+    func displayData(viewModel: WeatherRouter.ViewModel.ViewModelData)
 }
 
 protocol WeatherControllerDelegate: AnyObject {
@@ -19,12 +17,12 @@ protocol WeatherControllerDelegate: AnyObject {
 
 class WeatherViewController: UIViewController, WeatherDisplayLogic {
     let weatherView = WeatherView()
-    var interactor: WeatherBusinessLogic?
+    var interactor: LocationServiceProtocol?
     
     // MARK: - Setup
     private func setup() {
         let viewController        = self
-        let interactor            = WeatherInteractor()
+        let interactor            = LocationService()
         let presenter             = WeatherPresenter()
         viewController.interactor = interactor
         interactor.presenter      = presenter
@@ -52,7 +50,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
     }
     
     //MARK: - displayData
-    func displayData(viewModel: WeatherEnumModel.ViewModel.ViewModelData) {
+    func displayData(viewModel: WeatherRouter.ViewModel.ViewModelData) {
         switch viewModel {
         case .displayWeather(let currentWeatherViewModel):
             weatherView.configure(viewModel: currentWeatherViewModel)

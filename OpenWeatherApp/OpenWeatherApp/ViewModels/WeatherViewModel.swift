@@ -30,3 +30,21 @@ struct CurrentWeatherViewModel {
         let icon: String
     }
 }
+
+enum WeatherRouter {
+    struct Request {
+        enum RequestType {
+            case getWeather
+        }
+    }
+    struct Response {
+        enum ResponseType {
+            case presentWeather(weather: WeatherModel, locality: String)
+        }
+    }
+    struct ViewModel {
+        enum ViewModelData {
+            case displayWeather(currentWeatherViewModel: CurrentWeatherViewModel)
+        }
+    }
+}

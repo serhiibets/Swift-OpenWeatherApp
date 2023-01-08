@@ -179,7 +179,7 @@ class WeatherView: UIScrollView {
         loadingText.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         loadingText.topAnchor.constraint(equalTo: topAnchor, constant: 200).isActive = true
         loadingText.contentHuggingPriority(for: .vertical)
-        
+
         spiner.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         spiner.topAnchor.constraint(equalTo: self.loadingText.bottomAnchor, constant: 30).isActive = true
         spiner.contentHuggingPriority(for: .vertical)
@@ -235,7 +235,7 @@ class WeatherView: UIScrollView {
                 self.mainView.alpha = 1
                 self.spiner.stopAnimating()
             })
-            
+
             self.backgroundColor = self.mainView.backgroundColor
             self.inputViewController?.navigationItem.title = viewModel.locality
             self.tempMinMaxLabel.text = viewModel.maxMinTemp

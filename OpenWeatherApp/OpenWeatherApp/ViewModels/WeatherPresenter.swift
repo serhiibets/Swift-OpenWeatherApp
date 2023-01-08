@@ -1,17 +1,15 @@
-//
 //  WeatherPresenter.swift
 //  OpenWeatherApp
 //
 //  Created by Serhii Bets on 6/1/23.
 //
-
 import UIKit
 
-protocol WeatherPresentationLogic {
-    func presentData(response: WeatherEnumModel.Response.ResponseType)
+protocol WeatherPresenterProtocol {
+    func presentData(response: WeatherRouter.Response.ResponseType)
 }
 
-class WeatherPresenter: WeatherPresentationLogic {
+class WeatherPresenter: WeatherPresenterProtocol {
     weak var viewController: WeatherDisplayLogic?
     
     let dateFormatter: DateFormatter = {
@@ -22,7 +20,7 @@ class WeatherPresenter: WeatherPresentationLogic {
     
     
     //MARK: - presentData
-    func presentData(response: WeatherEnumModel.Response.ResponseType) {
+    func presentData(response: WeatherRouter.Response.ResponseType) {
         switch response {
         case .presentWeather(let weather, let locality):
             var hourlyCells: [CurrentWeatherViewModel.Hourly] = []
