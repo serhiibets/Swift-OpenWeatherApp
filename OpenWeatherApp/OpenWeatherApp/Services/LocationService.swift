@@ -42,7 +42,6 @@ class LocationService: NSObject, LocationServiceProtocol, Update {
     }
 
     private func getCityLocation() {
-        print("\n ------------------------------------------------ selectedPlacemark = \(placemark)")
         guard let placemark = placemark else {return}
         let currentLocation = placemark.location
         guard let currentLocation = currentLocation else { return }

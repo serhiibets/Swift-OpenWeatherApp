@@ -16,7 +16,7 @@ protocol WeatherControllerDelegate: AnyObject {
 }
 
 class WeatherViewController: UIViewController, WeatherDisplayLogic {
-    let weatherView = WeatherView()
+    let weatherView = MainScrollView()
     var interactor: (LocationServiceProtocol & Update)?
     
     // MARK: - Setup
@@ -34,11 +34,20 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
         super.viewDidLoad()
         setup()
         configureNavBar(location: "-")
+        weatherView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(weatherView)
-        weatherView.frame = self.view.frame
-        view.backgroundColor = AssetsColor.primaryBackground.color
+        
+        makeConstraints()
+        
         interactor?.isLocationOrMap = true
+    }
+    
+    private func makeConstraints(){
+        weatherView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        weatherView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        weatherView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        weatherView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,7 +58,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        weatherView.contentSize = CGSize(width:self.view.bounds.width, height: self.view.bounds.height)
+        //weatherView.contentSize = CGSize(width:self.view.bounds.width, height: self.view.bounds.height)
     }
     
     //MARK: - displayData

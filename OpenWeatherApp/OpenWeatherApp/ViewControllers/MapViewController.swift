@@ -17,7 +17,7 @@ protocol Update: AnyObject {
 class MapViewController: UIViewController {
     //MARK: - Variables
     let locationManager = CLLocationManager()
-    let locationSearchTable = LocationSearchTableViewController()
+    let locationSearchTable = SearchResultTableViewController()
 
     var city: MKPlacemark?
     var delegate: Update?
@@ -25,7 +25,6 @@ class MapViewController: UIViewController {
     @objc func handleSaveButton() {
         guard let city = city else { return }
         delegate?.placemark = city
-        print("\n ------------------------------------------------ Pressed Save button - city is \(city)")
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -74,10 +73,15 @@ class MapViewController: UIViewController {
     // Configure NavBar
     func configureNavBar() {
         navigationItem.searchController = searchController
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "location"),
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(handleSaveButton))
+        
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "location"),
+//                                                            style: .plain,
+//                                                            target: self,
+//                                                            action: #selector(handleSaveButton))
         navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
