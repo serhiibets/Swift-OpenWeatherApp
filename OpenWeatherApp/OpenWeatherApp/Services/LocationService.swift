@@ -9,18 +9,24 @@ import MapKit
 
 protocol LocationServiceProtocol {
     func makeRequest(request: WeatherRouter.Request.RequestType)
+    var isLocationOrMap: Bool? { get set }
 }
 
-class LocationService: NSObject, LocationServiceProtocol {
+class LocationService: NSObject, LocationServiceProtocol, Update {
+    static let shared = LocationService()
+    
+    private override init() {
+        super.init()
+    }
+    
     //MARK: - Variables
     let locationService = CLLocationManager()
     var networkService = NetworkService()
     let geocoder = CLGeocoder()
     
     var presenter: WeatherPresenterProtocol?
-    
-    var isCurrentLocation = true
     var placemark: MKPlacemark?
+    var isLocationOrMap: Bool?
     
     private func getCurrentLocation() {
         self.locationService.requestAlwaysAuthorization()
@@ -33,27 +39,13 @@ class LocationService: NSObject, LocationServiceProtocol {
         locationService.desiredAccuracy = kCLLocationAccuracyBest
         locationService.requestWhenInUseAuthorization()
         locationService.startUpdatingLocation()
-        guard let currentLocation = locationService.location else { return }
-        let coordinates = "lat=\(currentLocation.coordinate.latitude)&lon=\(currentLocation.coordinate.longitude)"
-        locationService.stopUpdatingLocation()
-        
-        //get location name
-        geocoder.reverseGeocodeLocation(currentLocation, preferredLocale: Locale.init(identifier: "uk_UA")) { placemarks, error in
-            let locality = placemarks?[0].locality ?? (placemarks?[0].name ?? "Error of Location")
-            
-            //getWeather
-            self.networkService.getWeather(coordinates: coordinates) { weatherResponse in
-                guard let weatherResponse = weatherResponse else { return }
-                self.presenter?.presentData(response: .presentWeather(weather: weatherResponse, locality: locality))
-            }
-        }
     }
-    
-    private func getDifferentLocation() {
-        guard let placemark = placemark else { return }
+
+    private func getCityLocation() {
+        print("\n ------------------------------------------------ selectedPlacemark = \(placemark)")
+        guard let placemark = placemark else {return}
         let currentLocation = placemark.location
         guard let currentLocation = currentLocation else { return }
-        
         let coordinates = "lat=\(placemark.coordinate.latitude)&lon=\(placemark.coordinate.latitude)"
         
         //get location name
@@ -71,8 +63,10 @@ class LocationService: NSObject, LocationServiceProtocol {
     //MARK: - makeRequest
     func makeRequest(request: WeatherRouter.Request.RequestType) {
         switch request {
-            case .getWeather:
-                isCurrentLocation ? getCurrentLocation() : getDifferentLocation()
+            case .getCurrentWeather:
+                getCurrentLocation()
+            case .getCityWeather:
+                getCityLocation()
         }
     }
 }

@@ -20,6 +20,7 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
         searchRequest.naturalLanguageQuery = searchBarText
         searchRequest.region = MKCoordinateRegion(.world)
         let search = MKLocalSearch(request: searchRequest)
+        searchRequest.pointOfInterestFilter = MKPointOfInterestFilter.excludingAll
         search.start { (response, error) in
             guard let response = response else {
                 return
@@ -43,7 +44,7 @@ extension LocationSearchTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.updateCurrentLocation(placemark: searchResults[indexPath.row].placemark)
+        delegate?.setCityOnMap(placemark: searchResults[indexPath.row].placemark)
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.isHidden = true
     }

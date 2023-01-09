@@ -8,13 +8,26 @@ import MapKit
 import CoreLocation
 
 protocol LocationSearchControllerProtocol {
-    func updateCurrentLocation(placemark: MKPlacemark)
+    func setCityOnMap(placemark: MKPlacemark)
+}
+protocol Update: AnyObject {
+    var placemark: MKPlacemark? {get set}
 }
 
 class MapViewController: UIViewController {
     //MARK: - Variables
     let locationManager = CLLocationManager()
     let locationSearchTable = LocationSearchTableViewController()
+
+    var city: MKPlacemark?
+    var delegate: Update?
+    
+    @objc func handleSaveButton() {
+        guard let city = city else { return }
+        delegate?.placemark = city
+        print("\n ------------------------------------------------ Pressed Save button - city is \(city)")
+        self.navigationController?.popViewController(animated: true)
+    }
     
     //MARK: - Create UI components
     private lazy var mainView: UIView = {
@@ -61,7 +74,11 @@ class MapViewController: UIViewController {
     // Configure NavBar
     func configureNavBar() {
         navigationItem.searchController = searchController
-        //navigationItem.backAction = #selector()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "location"),
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(handleSaveButton))
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     // MARK: - View lifecycle
@@ -113,9 +130,11 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 extension MapViewController: LocationSearchControllerProtocol {
-    func updateCurrentLocation(placemark: MKPlacemark) {
+    func setCityOnMap(placemark: MKPlacemark) {
         let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
         mapView.setRegion(region, animated: false)
+        navigationItem.rightBarButtonItem?.isEnabled = true
+        self.city = placemark
     }
 }

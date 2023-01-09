@@ -34,9 +34,11 @@ struct CurrentWeatherViewModel {
 enum WeatherRouter {
     struct Request {
         enum RequestType {
-            case getWeather
+            case getCurrentWeather
+            case getCityWeather
         }
     }
+        
     struct Response {
         enum ResponseType {
             case presentWeather(weather: WeatherModel, locality: String)

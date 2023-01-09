@@ -17,12 +17,12 @@ protocol WeatherControllerDelegate: AnyObject {
 
 class WeatherViewController: UIViewController, WeatherDisplayLogic {
     let weatherView = WeatherView()
-    var interactor: LocationServiceProtocol?
+    var interactor: (LocationServiceProtocol & Update)?
     
     // MARK: - Setup
     private func setup() {
         let viewController        = self
-        let interactor            = LocationService()
+        let interactor            = LocationService.shared
         let presenter             = WeatherPresenter()
         viewController.interactor = interactor
         interactor.presenter      = presenter
@@ -37,17 +37,19 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
         
         view.addSubview(weatherView)
         weatherView.frame = self.view.frame
-        view.backgroundColor = AppStyle.light.primaryBackgroundColor
+        view.backgroundColor = AssetsColor.primaryBackground.color
+        interactor?.isLocationOrMap = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        interactor?.makeRequest(request: .getWeather)
+        guard let isLocationOrMap = interactor?.isLocationOrMap else {return}
+        isLocationOrMap ? interactor?.makeRequest(request: .getCurrentWeather) : interactor?.makeRequest(request: .getCityWeather)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        weatherView.contentSize = CGSize(width:self.view.bounds.width, height: 845)
+        weatherView.contentSize = CGSize(width:self.view.bounds.width, height: self.view.bounds.height)
     }
     
     //MARK: - displayData
@@ -66,7 +68,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.isTranslucent = false
         let navBarAppearance = UINavigationBarAppearance()
-        navBarAppearance.backgroundColor = AppStyle.light.primaryBackgroundColor
+        navBarAppearance.backgroundColor = AssetsColor.primaryBackground.color
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
         
@@ -99,11 +101,14 @@ extension WeatherViewController: WeatherControllerDelegate {
     // MARK: - NavBar Selectors
     
     @objc func handleMapButtonPressed() {
+        interactor?.isLocationOrMap = false
         let vc = MapViewController()
             navigationController?.pushViewController(vc, animated: true)
+        vc.delegate = interactor
     }
     
     @objc func handleCurrentLocationPressed() {
-        interactor?.makeRequest(request: .getWeather)
+        interactor?.makeRequest(request: .getCurrentWeather)
+        interactor?.isLocationOrMap = true
     }
 }
