@@ -7,7 +7,6 @@ import Foundation
 import UIKit
 
 class DailyTableViewCell: UITableViewCell{
-    
     static let reuseId = "DailyTableViewCell"
     
     //MARK: - variables
@@ -20,6 +19,7 @@ class DailyTableViewCell: UITableViewCell{
         return label
     }()
     
+    //MARK: - Create UI components
     private lazy var weatherImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -45,20 +45,17 @@ class DailyTableViewCell: UITableViewCell{
         return label
     }()
     
-    // Constraints
+    //MARK: - Constraints
     private func makeConstraints(){
-        // dayOfWeekLabel constraints
         dayOfWeekLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         dayOfWeekLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
         dayOfWeekLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
         dayOfWeekLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
         
-        //tempMinLabel constraints
         tempMinMaxLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         tempMinMaxLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         tempMinMaxLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         
-        //weatherImage. constraints
         weatherImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         weatherImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28).isActive = true
         weatherImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
@@ -83,7 +80,7 @@ class DailyTableViewCell: UITableViewCell{
     }
     
     //MARK: - configure
-    func set (data: CurrentWeatherViewModel.Daily){
+    func configure(data: CurrentWeatherViewModel.Daily){
         dayOfWeekLabel.text = String(data.dt)
         weatherImage.image = UIImage(named: data.icon)
         tempMinMaxLabel.text = "\(data.minTemp) / \(data.maxTemp)"

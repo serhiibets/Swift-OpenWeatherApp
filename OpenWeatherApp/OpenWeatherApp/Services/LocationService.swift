@@ -12,7 +12,8 @@ protocol LocationServiceProtocol {
     var isLocationOrMap: Bool? { get set }
 }
 
-class LocationService: NSObject, LocationServiceProtocol, Update {
+class LocationService: NSObject, LocationServiceProtocol, UpdateLocationFromMap {
+    // Create LocationService singleton
     static let shared = LocationService()
     
     private override init() {
@@ -28,6 +29,8 @@ class LocationService: NSObject, LocationServiceProtocol, Update {
     var placemark: MKPlacemark?
     var isLocationOrMap: Bool?
     
+    /// Get currentLocation from CLLocationManager() and download weather
+    /// in delegate [didUpdateLocations]
     private func getCurrentLocation() {
         self.locationService.requestAlwaysAuthorization()
         self.locationService.requestWhenInUseAuthorization()
@@ -41,6 +44,7 @@ class LocationService: NSObject, LocationServiceProtocol, Update {
         locationService.startUpdatingLocation()
     }
 
+    /// Get weather from chose location
     private func getCityLocation() {
         guard let placemark = placemark else {return}
         let currentLocation = placemark.location

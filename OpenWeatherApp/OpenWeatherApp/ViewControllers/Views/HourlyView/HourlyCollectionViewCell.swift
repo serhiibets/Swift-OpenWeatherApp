@@ -19,6 +19,7 @@ class HourlyCollectionViewCell: UICollectionViewCell{
         return label
     }()
     
+    //MARK: - Create UI components
     private lazy var weatherImage: UIImageView = {
        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -34,19 +35,16 @@ class HourlyCollectionViewCell: UICollectionViewCell{
         return label
     }()
     
-    // Constraints
+    //MARK: - Constraints
     private func makeConstraints(){
-        // howerLabel constraints
         howerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 18).isActive = true
         howerLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        // weatherImage constraints
         weatherImage.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         weatherImage.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         weatherImage.heightAnchor.constraint(equalToConstant: 30).isActive = true
         weatherImage.widthAnchor.constraint(equalToConstant: 30).isActive = true
         
-        // tempLabel constraints
         tempLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -18).isActive = true
         tempLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
@@ -66,13 +64,9 @@ class HourlyCollectionViewCell: UICollectionViewCell{
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
     
     //MARK: - Configure
-    func set(data: CurrentWeatherViewModel.Hourly){
+    func configure(data: CurrentWeatherViewModel.Hourly){
         howerLabel.text = data.dt
         weatherImage.image = UIImage(named: data.icon)
         tempLabel.text = data.temp

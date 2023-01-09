@@ -1,4 +1,3 @@
-//
 //  LocationSearchTableViewController.swift
 //  OpenWeatherApp
 //
@@ -31,6 +30,7 @@ extension SearchResultTableViewController : UISearchResultsUpdating {
     }
 }
 
+//MARK: - Extensions
 extension SearchResultTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResults.count

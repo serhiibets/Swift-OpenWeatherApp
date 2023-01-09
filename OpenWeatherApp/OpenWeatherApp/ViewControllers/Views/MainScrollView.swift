@@ -77,16 +77,8 @@ class MainScrollView: UIScrollView {
             })
 
             self.headerView.configure(viewModel: viewModel)
-            self.hourlyCollectionView.set(cells: viewModel.hourlyWeather)
+            self.hourlyCollectionView.configure(cells: viewModel.hourlyWeather)
             self.dailyTableView.set(cells: viewModel.dailyWeather)
         }
-    }
-    
-    func configureSelfScrollView(){
-        self.bounces = false
-        self.contentInsetAdjustmentBehavior = .never
-        self.showsVerticalScrollIndicator = false
-        self.showsHorizontalScrollIndicator = false
-        backgroundColor = AssetsColor.primaryBackground.color
     }
 }

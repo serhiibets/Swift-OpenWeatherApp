@@ -17,7 +17,7 @@ protocol WeatherControllerDelegate: AnyObject {
 
 class WeatherViewController: UIViewController, WeatherDisplayLogic {
     let weatherView = MainScrollView()
-    var interactor: (LocationServiceProtocol & Update)?
+    var interactor: (LocationServiceProtocol & UpdateLocationFromMap)?
     
     // MARK: - Setup
     private func setup() {
@@ -34,31 +34,26 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
         super.viewDidLoad()
         setup()
         configureNavBar(location: "-")
-        weatherView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(weatherView)
-        
         makeConstraints()
-        
         interactor?.isLocationOrMap = true
-    }
-    
-    private func makeConstraints(){
-        weatherView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        weatherView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        weatherView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        weatherView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        //Check show current location or location from the map
         guard let isLocationOrMap = interactor?.isLocationOrMap else {return}
         isLocationOrMap ? interactor?.makeRequest(request: .getCurrentWeather) : interactor?.makeRequest(request: .getCityWeather)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        //weatherView.contentSize = CGSize(width:self.view.bounds.width, height: self.view.bounds.height)
+    //MARK: - Constraints
+    private func makeConstraints(){
+        weatherView.translatesAutoresizingMaskIntoConstraints = false
+        weatherView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        weatherView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        weatherView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        weatherView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     }
     
     //MARK: - displayData
@@ -108,7 +103,6 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
 
 extension WeatherViewController: WeatherControllerDelegate {
     // MARK: - NavBar Selectors
-    
     @objc func handleMapButtonPressed() {
         interactor?.isLocationOrMap = false
         let vc = MapViewController()

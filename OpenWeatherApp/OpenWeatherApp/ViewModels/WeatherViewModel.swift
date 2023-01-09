@@ -1,10 +1,8 @@
-//
 //  WeatherViewModel.swift
 //  OpenWeatherApp
 //
 //  Created by Serhii Bets on 6/1/23.
 //
-
 struct CurrentWeatherViewModel {
     let locality: String
     let temp: String

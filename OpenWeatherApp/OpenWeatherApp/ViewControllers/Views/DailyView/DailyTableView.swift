@@ -9,8 +9,6 @@ import UIKit
 class DailyTableView: UITableView, UITableViewDataSource, UITableViewDelegate{
     var cells: [CurrentWeatherViewModel.Daily]?
     
-    static let cellHeight:CGFloat = 55
-    
     //MARK: - init
     init() {
         super.init(frame: .zero, style: .plain)
@@ -40,12 +38,12 @@ class DailyTableView: UITableView, UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dequeueReusableCell(withIdentifier: DailyTableViewCell.reuseId, for: indexPath) as! DailyTableViewCell
         guard let cells = cells else { return cell}
-        cell.set(data: cells[indexPath.row])
+        cell.configure(data: cells[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return DailyTableView.cellHeight
+        return 55
     }
     
     //MARK: - Configure

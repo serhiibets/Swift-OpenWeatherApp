@@ -3,7 +3,6 @@
 //
 //  Created by Serhii Bets on 6/1/23.
 //
-
 import Foundation
 
 struct WeatherModel: Decodable{

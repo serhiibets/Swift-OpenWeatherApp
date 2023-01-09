@@ -10,7 +10,7 @@ import CoreLocation
 protocol LocationSearchControllerProtocol {
     func setCityOnMap(placemark: MKPlacemark)
 }
-protocol Update: AnyObject {
+protocol UpdateLocationFromMap: AnyObject {
     var placemark: MKPlacemark? {get set}
 }
 
@@ -20,13 +20,7 @@ class MapViewController: UIViewController {
     let locationSearchTable = SearchResultTableViewController()
 
     var city: MKPlacemark?
-    var delegate: Update?
-    
-    @objc func handleSaveButton() {
-        guard let city = city else { return }
-        delegate?.placemark = city
-        self.navigationController?.popViewController(animated: true)
-    }
+    var delegate: UpdateLocationFromMap?
     
     //MARK: - Create UI components
     private lazy var mainView: UIView = {
@@ -61,28 +55,13 @@ class MapViewController: UIViewController {
         return searchController
     }()
     
-    // Constraints
+    //MARK: - Constraints
     private func makeConstraints(){
         mapView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         mapView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         mapView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
         mapView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         mapView.contentHuggingPriority(for: .vertical)
-    }
-    
-    // Configure NavBar
-    func configureNavBar() {
-        navigationItem.searchController = searchController
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(handleSaveButton))
-        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "location"),
-//                                                            style: .plain,
-//                                                            target: self,
-//                                                            action: #selector(handleSaveButton))
-        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     // MARK: - View lifecycle
@@ -101,6 +80,23 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         getLocation()
+    }
+    
+    //MARK: - Configure NavBar
+    func configureNavBar() {
+        navigationItem.searchController = searchController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(handleSaveButton))
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
+    //MARK: - NavBar Selectors
+    @objc func handleSaveButton() {
+        guard let city = city else { return }
+        delegate?.placemark = city
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

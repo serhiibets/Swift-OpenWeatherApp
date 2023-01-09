@@ -35,7 +35,7 @@ class HourlyCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.reuseId, for: indexPath) as! HourlyCollectionViewCell
         guard let cells = cells else { return cell}
-        cell.set(data: cells[indexPath.row])
+        cell.configure(data: cells[indexPath.row])
         return cell
     }
     
@@ -54,7 +54,7 @@ class HourlyCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
     }
     
     //MARK: - configure
-    func set(cells: [CurrentWeatherViewModel.Hourly]){
+    func configure(cells: [CurrentWeatherViewModel.Hourly]){
         self.cells = cells
         reloadData()
     }

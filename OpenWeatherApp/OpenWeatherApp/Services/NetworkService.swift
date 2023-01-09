@@ -11,8 +11,7 @@ protocol NetworkServiceProtocol{
 
 struct NetworkService: NetworkServiceProtocol{
     func getWeather(coordinates: String, completion: @escaping (WeatherModel?) -> Void) {
-    let fullUrl = "\(API.url)\(coordinates)"
-        print(fullUrl)
+        let fullUrl = "\(API.url)\(API.apiKey)&\(coordinates)"
         guard let url = URL(string: fullUrl) else { return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
