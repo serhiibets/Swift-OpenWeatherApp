@@ -142,6 +142,7 @@ class WeatherView: UIScrollView {
     //MARK: - init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configureSelfScrollView()
         
         addSubview(loadingText)
         addSubview(spiner)
@@ -171,6 +172,9 @@ class WeatherView: UIScrollView {
     
     //MARK: - constraints
     private func makeConstraints(){
+        let safeArea: CGFloat = 18
+        let iconSize: CGFloat = 30
+        
         //Loading
         loadingText.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         loadingText.topAnchor.constraint(equalTo: topAnchor, constant: 200).isActive = true
@@ -183,41 +187,41 @@ class WeatherView: UIScrollView {
         // mainView constraints
         mainView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         mainView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        mainView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-        mainView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        mainView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+        mainView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         mainView.contentHuggingPriority(for: .vertical)
         
         cloudBigImage.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 20).isActive = true
-        cloudBigImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
+        cloudBigImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: safeArea).isActive = true
         cloudBigImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
         cloudBigImage.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         tempIcon.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 30).isActive = true
         tempIcon.leadingAnchor.constraint(equalTo: cloudBigImage.trailingAnchor, constant: 20).isActive = true
-        tempIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        tempIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        tempIcon.widthAnchor.constraint(equalToConstant: iconSize).isActive = true
+        tempIcon.heightAnchor.constraint(equalToConstant: iconSize).isActive = true
         
         tempMinMaxLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 30).isActive = true
         tempMinMaxLabel.leadingAnchor.constraint(equalTo: tempIcon.trailingAnchor, constant: 10).isActive = true
-        tempMinMaxLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
+        tempMinMaxLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -safeArea).isActive = true
         
         humidityIcon.topAnchor.constraint(equalTo: tempIcon.bottomAnchor, constant: 15).isActive = true
         humidityIcon.leadingAnchor.constraint(equalTo: cloudBigImage.trailingAnchor, constant: 20).isActive = true
-        humidityIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        humidityIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        humidityIcon.widthAnchor.constraint(equalToConstant: iconSize).isActive = true
+        humidityIcon.heightAnchor.constraint(equalToConstant: iconSize).isActive = true
         
         humidityLabel.topAnchor.constraint(equalTo: tempMinMaxLabel.bottomAnchor, constant: 15).isActive = true
         humidityLabel.leadingAnchor.constraint(equalTo: humidityIcon.trailingAnchor, constant: 10).isActive = true
-        humidityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
+        humidityLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -safeArea).isActive = true
         
         windIcon.topAnchor.constraint(equalTo: humidityIcon.bottomAnchor, constant: 15).isActive = true
         windIcon.leadingAnchor.constraint(equalTo: cloudBigImage.trailingAnchor, constant: 20).isActive = true
-        windIcon.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        windIcon.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        windIcon.widthAnchor.constraint(equalToConstant: iconSize).isActive = true
+        windIcon.heightAnchor.constraint(equalToConstant: iconSize).isActive = true
         
         windLabel.topAnchor.constraint(equalTo: humidityLabel.bottomAnchor, constant: 15).isActive = true
         windLabel.leadingAnchor.constraint(equalTo: windIcon.trailingAnchor, constant: 10).isActive = true
-        windLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
+        windLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -safeArea).isActive = true
     }
     
     //MARK: - configure
@@ -252,7 +256,15 @@ class WeatherView: UIScrollView {
             self.dailyTableView.frame = CGRect(x: -18,
                                                y: self.hourlyCollectionView.frame.maxY,
                                                width: self.frame.width,
-                                               height: self.frame.height - self.hourlyCollectionView.frame.height)
+                                               height: DailyTableView.cellHeight * 7)
         }
+    }
+    
+    func configureSelfScrollView(){
+        self.bounces = false
+        self.contentInsetAdjustmentBehavior = .never
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
+        backgroundColor = AppStyle.light.primaryBackgroundColor
     }
 }

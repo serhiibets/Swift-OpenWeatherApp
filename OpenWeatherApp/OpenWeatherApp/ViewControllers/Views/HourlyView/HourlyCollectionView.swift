@@ -17,7 +17,7 @@ class HourlyCollectionView: UICollectionView, UICollectionViewDataSource, UIColl
         dataSource = self
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
-        backgroundColor = .clear
+        backgroundColor = AppStyle.light.secondaryBackgroundColor
         
         register(HourlyCollectionViewCell.self, forCellWithReuseIdentifier: HourlyCollectionViewCell.reuseId)
     }

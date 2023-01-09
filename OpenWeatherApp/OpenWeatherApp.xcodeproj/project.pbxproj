@@ -43,8 +43,8 @@
 		F425DF622968242600DD820F /* Extension + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + String.swift"; sourceTree = "<group>"; };
 		F425DF66296824FC00DD820F /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeatherView.swift; path = ViewControllers/Views/WeatherView.swift; sourceTree = "<group>"; };
 		F425DF682968285500DD820F /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
-		F425DF6D2968B2D200DD820F /* HourlyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HourlyCollectionView.swift; path = ../ViewControllers/Views/HourlyView/HourlyCollectionView.swift; sourceTree = "<group>"; };
-		F425DF6F2968B2DF00DD820F /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HourlyCollectionViewCell.swift; path = ../ViewControllers/Views/HourlyView/HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
+		F425DF6D2968B2D200DD820F /* HourlyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionView.swift; sourceTree = "<group>"; };
+		F425DF6F2968B2DF00DD820F /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
 		F425DF712968B75000DD820F /* WeatherPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPresenter.swift; sourceTree = "<group>"; };
 		F425DF762968BCB000DD820F /* DailyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyTableView.swift; path = ViewControllers/Views/DailyView/DailyTableView.swift; sourceTree = "<group>"; };
 		F425DF782968BCBA00DD820F /* DailyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DailyTableViewCell.swift; path = ViewControllers/Views/DailyView/DailyTableViewCell.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 				F425DF6F2968B2DF00DD820F /* HourlyCollectionViewCell.swift */,
 			);
 			name = HourlyView;
-			path = Views;
+			path = ViewControllers/Views/HourlyView;
 			sourceTree = "<group>";
 		};
 		F425DF752968BC9500DD820F /* DailyView */ = {
