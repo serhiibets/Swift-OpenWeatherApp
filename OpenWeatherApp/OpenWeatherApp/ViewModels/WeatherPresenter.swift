@@ -53,7 +53,9 @@ class WeatherPresenter: WeatherPresenterProtocol {
             let currentWeather = headerViewModel(weatherModel: weather, hourlyCells: hourlyCells, maxMinTemp: maxMinTemp, dailyCells: dailyCells, locality: locality)
             
             // send display data to viewController
-            viewController?.displayData(viewModel: .displayWeather(currentWeatherViewModel: currentWeather))
+                DispatchQueue.main.async {
+                    self.viewController?.displayData(viewModel: .displayWeather(currentWeatherViewModel: currentWeather))
+                }
         }
     }
     
@@ -85,5 +87,4 @@ class WeatherPresenter: WeatherPresenterProtocol {
                                             maxMinTemp: maxMinTemp,
                                             dailyWeather: dailyCells)
     }
-    
 }

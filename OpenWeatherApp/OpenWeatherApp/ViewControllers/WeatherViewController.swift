@@ -34,7 +34,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
         super.viewDidLoad()
         setup()
         configureNavBar(location: "-")
-    
+        
         view.addSubview(weatherView)
         weatherView.frame = self.view.frame
         view.backgroundColor = AppStyle.light.primaryBackgroundColor
@@ -55,6 +55,8 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
         switch viewModel {
         case .displayWeather(let currentWeatherViewModel):
             weatherView.configure(viewModel: currentWeatherViewModel)
+                guard let titleLabel = navigationItem.titleView as? UILabel else { return }
+                titleLabel.text = currentWeatherViewModel.locality
         }
     }
     
@@ -75,7 +77,7 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
                                                 y: 0,
                                                 width: view.frame.width - CGFloat(leftNavBarInsect),
                                                 height: view.frame.height))
-        leftNavBarTitle.text = "Бенідорм"
+        leftNavBarTitle.text = "-"
         leftNavBarTitle.textColor = .white
         leftNavBarTitle.font = UIFont.systemFont(ofSize: 35)
         navigationItem.titleView = leftNavBarTitle
