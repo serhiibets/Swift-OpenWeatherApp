@@ -10,7 +10,7 @@ class WeatherView: UIScrollView {
     private lazy var mainView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = AppStyle.light.primaryBackgroundColor
+        view.backgroundColor = AssetsColor.primaryBackground.color
         view.alpha = 0
         return view
     }()
@@ -57,15 +57,6 @@ class WeatherView: UIScrollView {
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         return label
-    }()
-    
-    private lazy var mapButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "location"), for: .normal)
-        //button.addTarget(self, action: #selector(mapButtonPressed), for: .touchUpInside)
-        return button
     }()
     
     private lazy var cloudBigImage: UIImageView = {
@@ -265,6 +256,6 @@ class WeatherView: UIScrollView {
         self.contentInsetAdjustmentBehavior = .never
         self.showsVerticalScrollIndicator = false
         self.showsHorizontalScrollIndicator = false
-        backgroundColor = AppStyle.light.primaryBackgroundColor
+        backgroundColor = AssetsColor.primaryBackground.color
     }
 }
