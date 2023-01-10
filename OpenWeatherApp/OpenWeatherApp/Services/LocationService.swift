@@ -22,7 +22,6 @@ class LocationService: NSObject, LocationServiceProtocol, UpdateLocationFromMap 
     
     //MARK: - Variables
     let locationService = CLLocationManager()
-    var networkService = NetworkService()
     let geocoder = CLGeocoder()
     
     var presenter: WeatherPresenterProtocol?
@@ -59,7 +58,7 @@ class LocationService: NSObject, LocationServiceProtocol, UpdateLocationFromMap 
             let locality = placemarks?[0].locality ?? (placemarks?[0].name ?? "Error of Location")
             
             //getWeather
-            self.networkService.getWeather(coordinates: coordinates) { weatherResponse in
+            NetworkService.shared.getWeather(coordinates: coordinates) { weatherResponse in
                 guard let weatherResponse = weatherResponse else { return }
                 self.presenter?.presentData(response: .presentWeather(weather: weatherResponse, locality: locality))
             }
@@ -92,7 +91,7 @@ extension LocationService: CLLocationManagerDelegate {
             let locality = placemarks?[0].locality ?? (placemarks?[0].name ?? "Error of Location")
             
             //getWeather
-            self.networkService.getWeather(coordinates: coordinates) { weatherResponse in
+            NetworkService.shared.getWeather(coordinates: coordinates) { weatherResponse in
                 guard let weatherResponse = weatherResponse else { return }
                 self.presenter?.presentData(response: .presentWeather(weather: weatherResponse, locality: locality))
             }

@@ -10,7 +10,14 @@ protocol NetworkServiceProtocol{
     func getWeather(coordinates: String, completion: @escaping (WeatherModel?) -> Void)
 }
 
-struct NetworkService: NetworkServiceProtocol{    
+class NetworkService: NSObject, NetworkServiceProtocol{
+    // Create LocationService singleton
+    static let shared = NetworkService()
+    
+    private override init() {
+        super.init()
+    }
+    
     func getWeather(coordinates: String, completion: @escaping (WeatherModel?) -> Void) {
         let fullUrl = "\(API.url)\(API.apiKey)&\(coordinates)"
         guard let url = URL(string: fullUrl) else { return }
