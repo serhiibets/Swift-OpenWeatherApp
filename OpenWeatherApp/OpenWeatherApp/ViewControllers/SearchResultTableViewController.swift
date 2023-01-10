@@ -47,5 +47,6 @@ extension SearchResultTableViewController {
         delegate?.setCityOnMap(placemark: searchResults[indexPath.row].placemark)
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.isHidden = true
+        tableView.resignFirstResponder()
     }
 }

@@ -35,9 +35,12 @@ class LocationService: NSObject, LocationServiceProtocol, UpdateLocationFromMap 
         self.locationService.requestAlwaysAuthorization()
         self.locationService.requestWhenInUseAuthorization()
         
-        if !CLLocationManager.locationServicesEnabled() {
-            return
+        DispatchQueue.global().async {
+            if !CLLocationManager.locationServicesEnabled() {
+                return
+            }
         }
+
         locationService.delegate = self
         locationService.desiredAccuracy = kCLLocationAccuracyBest
         locationService.requestWhenInUseAuthorization()

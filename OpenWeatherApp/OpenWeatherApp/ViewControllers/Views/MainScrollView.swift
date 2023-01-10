@@ -26,6 +26,7 @@ class MainScrollView: UIScrollView {
         addSubview(hourlyCollectionView)
         addSubview(dailyTableView)
 
+        configureSelfScrollView()
         makeConstraints()
     }
     
@@ -45,20 +46,20 @@ class MainScrollView: UIScrollView {
         loadingView.bottomAnchor.constraint(equalTo: scrollFrameGuide.bottomAnchor).isActive = true
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.topAnchor.constraint(equalTo: scrollContentGuide.topAnchor).isActive = true
+        headerView.topAnchor.constraint(equalTo: self.topAnchor, constant: safeAreaInsets.top).isActive = true
         headerView.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor).isActive = true
         headerView.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 170).isActive = true
 
         hourlyCollectionView.translatesAutoresizingMaskIntoConstraints = false
         hourlyCollectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-        hourlyCollectionView.heightAnchor.constraint(equalToConstant: 165).isActive = true
+        hourlyCollectionView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         hourlyCollectionView.widthAnchor.constraint(equalTo: scrollFrameGuide.widthAnchor).isActive = true
 
         dailyTableView.translatesAutoresizingMaskIntoConstraints = false
         dailyTableView.topAnchor.constraint(equalTo: hourlyCollectionView.bottomAnchor).isActive = true
         dailyTableView.widthAnchor.constraint(equalTo: scrollFrameGuide.widthAnchor).isActive = true
-        dailyTableView.heightAnchor.constraint(equalTo: scrollFrameGuide.heightAnchor).isActive = true
+        dailyTableView.bottomAnchor.constraint(equalTo: scrollFrameGuide.bottomAnchor, constant: -safeAreaInsets.bottom).isActive = true
     }
     
     //MARK: - configure
@@ -80,5 +81,13 @@ class MainScrollView: UIScrollView {
             self.hourlyCollectionView.configure(cells: viewModel.hourlyWeather)
             self.dailyTableView.set(cells: viewModel.dailyWeather)
         }
+    }
+    
+    func configureSelfScrollView(){
+        self.bounces = false
+        self.contentInsetAdjustmentBehavior = .never
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
+        backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
     }
 }

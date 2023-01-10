@@ -47,6 +47,11 @@ class WeatherViewController: UIViewController, WeatherDisplayLogic {
         isLocationOrMap ? interactor?.makeRequest(request: .getCurrentWeather) : interactor?.makeRequest(request: .getCityWeather)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        weatherView.contentSize = CGSize(width: self.view.bounds.width, height: 750)
+    }
+    
     //MARK: - Constraints
     private func makeConstraints(){
         weatherView.translatesAutoresizingMaskIntoConstraints = false

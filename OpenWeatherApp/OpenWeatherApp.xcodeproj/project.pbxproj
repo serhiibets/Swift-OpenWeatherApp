@@ -10,6 +10,7 @@
 		D749A23C360B0C478FF3AA56 /* libPods-OpenWeatherApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D17D043EF64242DF62BC6F3D /* libPods-OpenWeatherApp.a */; };
 		F41448E0296CA97500AC7601 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41448DF296CA97500AC7601 /* HeaderView.swift */; };
 		F41448E3296CABD500AC7601 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41448E2296CABD500AC7601 /* LoadingView.swift */; };
+		F41448E7296E036C00AC7601 /* BlurEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41448E6296E036C00AC7601 /* BlurEffectView.swift */; };
 		F425DF3B2967804800DD820F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF3A2967804800DD820F /* AppDelegate.swift */; };
 		F425DF3D2967804800DD820F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF3C2967804800DD820F /* SceneDelegate.swift */; };
 		F425DF3F2967804800DD820F /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F425DF3E2967804800DD820F /* WeatherViewController.swift */; };
@@ -38,6 +39,7 @@
 		D17D043EF64242DF62BC6F3D /* libPods-OpenWeatherApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenWeatherApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F41448DF296CA97500AC7601 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		F41448E2296CABD500AC7601 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		F41448E6296E036C00AC7601 /* BlurEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectView.swift; sourceTree = "<group>"; };
 		F425DF372967804800DD820F /* OpenWeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F425DF3A2967804800DD820F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F425DF3C2967804800DD820F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,7 +82,6 @@
 				A5E3CACD1B4263FDDE912B12 /* Pods-OpenWeatherApp.debug.xcconfig */,
 				3591A59F6EEE9AA524619CAB /* Pods-OpenWeatherApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -187,6 +188,7 @@
 			children = (
 				F425DF622968242600DD820F /* Extension + String.swift */,
 				F425DF90296B27D000DD820F /* AppStyle.swift */,
+				F41448E6296E036C00AC7601 /* BlurEffectView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -351,6 +353,7 @@
 				F425DF832969E0F900DD820F /* MapViewController.swift in Sources */,
 				F425DF3D2967804800DD820F /* SceneDelegate.swift in Sources */,
 				F425DF67296824FC00DD820F /* MainScrollView.swift in Sources */,
+				F41448E7296E036C00AC7601 /* BlurEffectView.swift in Sources */,
 				F425DF91296B27D000DD820F /* AppStyle.swift in Sources */,
 				F425DF602968237400DD820F /* NetworkService.swift in Sources */,
 				F425DF5C296822B700DD820F /* WeatherModel.swift in Sources */,
