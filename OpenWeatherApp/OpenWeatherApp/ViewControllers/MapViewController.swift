@@ -14,9 +14,9 @@ protocol UpdateLocationFromMap: AnyObject {
     var placemark: MKPlacemark? {get set}
 }
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, UISearchControllerDelegate {
     //MARK: - Variables
-    let locationManager = CLLocationManager()
+    let locationService = CLLocationManager()
     let locationSearchTable = SearchResultTableViewController()
 
     var city: MKPlacemark?
@@ -70,6 +70,7 @@ class MapViewController: UIViewController {
         configureNavBar()
         
         locationSearchTable.delegate = self
+        searchController.delegate = self
 
         view.addSubview(mainView)
         mainView.frame = self.view.frame
@@ -103,21 +104,25 @@ class MapViewController: UIViewController {
 //MARK: - Extensions
 extension MapViewController: CLLocationManagerDelegate {
     private func getLocation() {
-        self.locationManager.requestAlwaysAuthorization()
-        self.locationManager.requestWhenInUseAuthorization()
+        self.locationService.requestAlwaysAuthorization()
+        self.locationService.requestWhenInUseAuthorization()
         
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
+        DispatchQueue.global().async {
+            if !CLLocationManager.locationServicesEnabled() {
+                return
+            }
         }
+
+        locationService.delegate = self
+        locationService.desiredAccuracy = kCLLocationAccuracyBest
+        locationService.requestWhenInUseAuthorization()
+        locationService.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard locations.last != nil else { return }
-        guard let currentLocation = locationManager.location?.coordinate else { return }
-        self.locationManager.stopUpdatingLocation()
+        guard let currentLocation = locationService.location?.coordinate else { return }
+        self.locationService.stopUpdatingLocation()
         
         let span = MKCoordinateSpan.init(latitudeDelta: 0.05, longitudeDelta: 0.05)
         let region = MKCoordinateRegion(center: currentLocation, span: span)
