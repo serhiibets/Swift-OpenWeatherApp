@@ -9,7 +9,7 @@ import UIKit
 class DailyTableViewCell: UITableViewCell{
     static let reuseId = "DailyTableViewCell"
     
-    //MARK: - variables
+    //MARK: - Create UI components
     private lazy var dayOfWeekLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -19,21 +19,11 @@ class DailyTableViewCell: UITableViewCell{
         return label
     }()
     
-    //MARK: - Create UI components
     private lazy var weatherImage: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "09d")
         return view
-    }()
-    
-    private lazy var tempMaxLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20)
-        label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        return label
     }()
     
     private lazy var tempMinMaxLabel: UILabel = {
@@ -70,7 +60,6 @@ class DailyTableViewCell: UITableViewCell{
         contentView.addSubview(dayOfWeekLabel)
         contentView.addSubview(weatherImage)
         contentView.addSubview(tempMinMaxLabel)
-        contentView.addSubview(tempMaxLabel)
         
         makeConstraints()
     }

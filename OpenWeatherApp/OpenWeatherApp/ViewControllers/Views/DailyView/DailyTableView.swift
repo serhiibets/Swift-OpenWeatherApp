@@ -8,6 +8,7 @@ import UIKit
 
 class DailyTableView: UITableView, UITableViewDataSource, UITableViewDelegate{
     var cells: [CurrentWeatherViewModel.Daily]?
+    private var blurEffectView = BlurEffect()
     
     //MARK: - init
     init() {
@@ -39,6 +40,8 @@ class DailyTableView: UITableView, UITableViewDataSource, UITableViewDelegate{
         let cell = dequeueReusableCell(withIdentifier: DailyTableViewCell.reuseId, for: indexPath) as! DailyTableViewCell
         guard let cells = cells else { return cell}
         cell.configure(data: cells[indexPath.row])
+        cell.backgroundColor = .clear
+        cell.backgroundView = blurEffectView
         return cell
     }
     
