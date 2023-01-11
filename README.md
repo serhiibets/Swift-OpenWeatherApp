@@ -1,4 +1,5 @@
-## OpenWeatherApp
+[<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/app_title.png height=100>
+<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/openweatherapp_icon.png height=90/>]
 
 [![Generic badge](https://img.shields.io/badge/OpenWeatherApp-v.0.1.0-brightgreen.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/OS-iOS-brightgreen.svg)](https://shields.io/)
