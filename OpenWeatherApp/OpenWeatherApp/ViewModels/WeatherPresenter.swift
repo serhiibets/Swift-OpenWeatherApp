@@ -25,8 +25,6 @@ class WeatherPresenter: WeatherPresenterProtocol {
             case .presentWeather(let weather, let locality):
                 var hourlyWeather: [CurrentWeatherViewModel.Hourly] = []
                 var dailyWeather: [CurrentWeatherViewModel.Daily] = []
-                var hourlyWeatherCell = hourlyWeather.first
-                var dailyWeatherCell = dailyWeather.first
 
                 // create data for hour cells
                 weather.hourly.forEach { hourly in
@@ -36,7 +34,7 @@ class WeatherPresenter: WeatherPresenterProtocol {
                                                                              icon: hourly.weather.first?.icon ?? "No icon"))
                 }
                 hourlyWeather.removeLast(24)
-                hourlyWeatherCell?.dt = "Зараз"
+                hourlyWeather[0].dt = "Зараз"
                 
                 //create data for daily cells
                 weather.daily.forEach { daily in
@@ -45,7 +43,7 @@ class WeatherPresenter: WeatherPresenterProtocol {
                                                                            maxTemp: setSign(temp: Int(daily.temp.max)),
                                                                            icon: daily.weather.first?.icon ?? "No icon"))
                 }
-                dailyWeatherCell?.dt = "Сьогодні"
+                dailyWeather[0].dt = "Сьогодні"
                 
                 // create data to minMaxLabel
                 let maxMinTemp = "\(dailyWeather.first?.minTemp ?? "") / \(dailyWeather.first?.maxTemp ?? "")"
