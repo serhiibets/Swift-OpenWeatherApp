@@ -89,3 +89,6 @@ fastlane/test_output
 
 iOSInjectionProject/
 OpenWeatherApp/OpenWeatherApp/API/API.swift
+OpenWeatherApp/.DS_Store
+OpenWeatherApp/documentation/.DS_Store
+OpenWeatherApp/.DS_Store
