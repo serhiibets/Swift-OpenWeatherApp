@@ -30,8 +30,8 @@ class WeatherPresenter: WeatherPresenterProtocol {
                 weather.hourly.forEach { hourly in
                     hourlyWeather.append(CurrentWeatherViewModel.Hourly.init(dt: formattedDate(dateFormat: "HH", date: hourly.dt),
                                                                              temp: setSign(temp: Int(hourly.temp)),
-                                                                             description: hourly.weather.first!.description,
-                                                                             icon: hourly.weather.first!.icon))
+                                                                             description: hourly.weather.first?.description ?? "No description",
+                                                                             icon: hourly.weather.first?.icon ?? "No icon"))
                 }
                 hourlyWeather.removeLast(24)
                 hourlyWeather[0].dt = "Зараз"
@@ -41,7 +41,7 @@ class WeatherPresenter: WeatherPresenterProtocol {
                     dailyWeather.append(CurrentWeatherViewModel.Daily.init(dt: formattedDate(dateFormat: "EEEE", date: daily.dt),
                                                                            minTemp: setSign(temp: Int(daily.temp.min)),
                                                                            maxTemp: setSign(temp: Int(daily.temp.max)),
-                                                                           icon: daily.weather.first!.icon))
+                                                                           icon: daily.weather.first?.icon ?? "No icon"))
                 }
                 dailyWeather[0].dt = "Сьогодні"
                 
