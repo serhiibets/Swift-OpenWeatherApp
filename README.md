@@ -4,20 +4,14 @@
 [![Generic badge](https://img.shields.io/badge/OS-iOS-brightgreen.svg)](https://shields.io/)
 [![Generic badge](https://img.shields.io/badge/Language-Swift-orange)](https://shields.io/)
 
+# What is OpenWeatherApp?
+What is OpenWeatherApp? It is preaty simple Weather mobile application, which allows people to check weather in current user location or choose location you want.
+
 ## Screenshots of the app
 [<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/main_screen.png height=400>
 <img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/map_screen.png height=400>
 <img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/search_scrren.png height=400>
 <img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/search_result_screen.png height=400>]
-
-## Table of contents
-- [What is OpenWeatherApp?](#what-is-openweatherapp)
-- [Features](#features)
-- [Clean architecture](#clean-architecture)
-- [License(s)](#licenses)
-
-# What is OpenWeatherApp?
-What is OpenWeatherApp? It is preaty simple Weather mobile application, which allows people to check weather in current user location or choose location you want.
 
 # Features
 - See the weather of current user location.
