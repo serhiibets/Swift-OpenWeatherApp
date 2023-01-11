@@ -5,16 +5,15 @@
 [![Generic badge](https://img.shields.io/badge/Language-Swift-orange)](https://shields.io/)
 
 ## Screenshots of the app
-[<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/main_screen.png height=600>
-<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/map_screen.png height=600>
-<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/search_scrren.png height=600>
-<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/search_result_screen.png height=600>
-<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/main_result_screen.png height=600>]
+[<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/main_screen.png height=400>
+<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/map_screen.png height=400>
+<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/search_scrren.png height=400>
+<img src=https://github.com/serhiibets/Swift-OpenWeatherApp/blob/main/OpenWeatherApp/documentation/screenshots/search_result_screen.png height=400>]
 
 ## Table of contents
 - [What is OpenWeatherApp?](#what-is-openweatherapp)
 - [Features](#features)
-- [Clean architecture](#for-developers)
+- [Clean architecture](#clean-architecture)
 - [License(s)](#licenses)
 
 # What is OpenWeatherApp?
