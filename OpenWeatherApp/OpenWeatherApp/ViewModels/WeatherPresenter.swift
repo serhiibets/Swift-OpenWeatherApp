@@ -25,7 +25,9 @@ class WeatherPresenter: WeatherPresenterProtocol {
             case .presentWeather(let weather, let locality):
                 var hourlyWeather: [CurrentWeatherViewModel.Hourly] = []
                 var dailyWeather: [CurrentWeatherViewModel.Daily] = []
-                
+                var hourlyWeatherCell = hourlyWeather.first
+                var dailyWeatherCell = dailyWeather.first
+
                 // create data for hour cells
                 weather.hourly.forEach { hourly in
                     hourlyWeather.append(CurrentWeatherViewModel.Hourly.init(dt: formattedDate(dateFormat: "HH", date: hourly.dt),
@@ -34,7 +36,7 @@ class WeatherPresenter: WeatherPresenterProtocol {
                                                                              icon: hourly.weather.first?.icon ?? "No icon"))
                 }
                 hourlyWeather.removeLast(24)
-                hourlyWeather[0].dt = "Зараз"
+                hourlyWeatherCell?.dt = "Зараз"
                 
                 //create data for daily cells
                 weather.daily.forEach { daily in
@@ -43,10 +45,10 @@ class WeatherPresenter: WeatherPresenterProtocol {
                                                                            maxTemp: setSign(temp: Int(daily.temp.max)),
                                                                            icon: daily.weather.first?.icon ?? "No icon"))
                 }
-                dailyWeather[0].dt = "Сьогодні"
+                dailyWeatherCell?.dt = "Сьогодні"
                 
                 // create data to minMaxLabel
-                let maxMinTemp = "\(dailyWeather[0].minTemp) / \(dailyWeather[0].maxTemp)"
+                let maxMinTemp = "\(dailyWeatherCell?.minTemp ?? "No min temp") / \(dailyWeatherCell?.maxTemp ?? "No max temp")"
                 
                 let currentWeather = headerViewModel(weatherModel: weather, hourlyWeather: hourlyWeather, maxMinTemp: maxMinTemp, dailyWeather: dailyWeather, locality: locality)
                 

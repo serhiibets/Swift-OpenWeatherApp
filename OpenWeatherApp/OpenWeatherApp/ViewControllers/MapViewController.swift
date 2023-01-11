@@ -69,7 +69,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate {
         view.addSubview(mapView)
         makeConstraints()
         
-        getLocation()
+        getCurrentLocation()
     }
     
     //MARK: - Configure NavBar
@@ -92,7 +92,7 @@ class MapViewController: UIViewController, UISearchControllerDelegate {
 
 //MARK: - Extensions
 extension MapViewController: CLLocationManagerDelegate {
-    private func getLocation() {
+    private func getCurrentLocation() {
         self.locationService.requestAlwaysAuthorization()
         self.locationService.requestWhenInUseAuthorization()
         
