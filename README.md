@@ -28,5 +28,8 @@ What is OpenWeatherApp? It is preaty simple Weather mobile application, which al
  
  Application created in code (without storyboards), using multythreading, custom assets colorSets.
  
- # License
- 
+# Licence
+
+Copyright 2023 by Serhii Bets 
+
+The source code on this site is licensed under the GNU General Public License v2.0. See [licence.txt](licence.txt) for details.
