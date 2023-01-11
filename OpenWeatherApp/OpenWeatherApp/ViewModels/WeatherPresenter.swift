@@ -50,7 +50,7 @@ class WeatherPresenter: WeatherPresenterProtocol {
             // create data to minMaxLabel
             let maxMinTemp = "\(dailyCells[0].minTemp) / \(dailyCells[0].maxTemp)"
             
-            let currentWeather = headerViewModel(weatherModel: weather, hourlyCells: hourlyCells, maxMinTemp: maxMinTemp, dailyCells: dailyCells, locality: locality)
+            let currentWeather = headerViewModel(weatherModel: weather, hourlyData: hourlyCells, maxMinTemp: maxMinTemp, dailyCells: dailyCells, locality: locality)
             
             // send display data to viewController
                 DispatchQueue.main.async {
@@ -76,14 +76,14 @@ class WeatherPresenter: WeatherPresenterProtocol {
     }
     
     // convert data to CurrentWeatherViewModel
-    private func headerViewModel(weatherModel: WeatherModel, hourlyCells: [CurrentWeatherViewModel.Hourly], maxMinTemp: String, dailyCells: [CurrentWeatherViewModel.Daily], locality: String) -> CurrentWeatherViewModel{
-        return CurrentWeatherViewModel.init(locality: locality,
+    private func headerViewModel(weatherModel: WeatherModel, hourlyData: [CurrentWeatherViewModel.Hourly], maxMinTemp: String, dailyCells: [CurrentWeatherViewModel.Daily], locality: String) -> CurrentWeatherViewModel{
+        return CurrentWeatherViewModel(locality: locality,
                                             temp: setSign(temp: Int(weatherModel.current.temp)),
                                             humidity: String(weatherModel.current.humidity),
                                             wind: String("\(weatherModel.current.windSpeed)  м/cек"),
                                             weatherDescription: weatherModel.current.weather.first?.description ?? "null",
                                             icon: weatherModel.current.weather.first?.icon ?? "unknown",
-                                            hourlyWeather: hourlyCells,
+                                            hourlyWeather: hourlyData,
                                             maxMinTemp: maxMinTemp,
                                             dailyWeather: dailyCells)
     }

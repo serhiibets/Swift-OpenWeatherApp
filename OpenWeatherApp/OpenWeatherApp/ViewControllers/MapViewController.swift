@@ -20,15 +20,9 @@ class MapViewController: UIViewController, UISearchControllerDelegate {
     let locationSearchTable = SearchResultTableViewController()
 
     var city: MKPlacemark?
-    var delegate: UpdateLocationFromMap?
+    weak var delegate: UpdateLocationFromMap?
     
     //MARK: - Create UI components
-    private lazy var mainView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     lazy var mapView: MKMapView = {
         let mapView = MKMapView()
         mapView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,14 +66,9 @@ class MapViewController: UIViewController, UISearchControllerDelegate {
         locationSearchTable.delegate = self
         searchController.delegate = self
 
-        view.addSubview(mainView)
-        mainView.frame = self.view.frame
-        mainView.addSubview(mapView)
+        view.addSubview(mapView)
         makeConstraints()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        
         getLocation()
     }
     
